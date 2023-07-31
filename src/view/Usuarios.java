@@ -258,8 +258,6 @@ public class Usuarios extends JDialog {
 		getContentPane().add(cboPerfil);
 		
 		chckSenha = new JCheckBox("Alterar a senha");
-		chckSenha.setVisible(false);
-		chckSenha.setEnabled(false);
 		chckSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckSenha.isSelected()) {

@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-j-8.0.32.jar"/>
 	<classpathentry kind="lib" path="src/view/dom4j-2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/itextpdf-5.5.9.jar"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

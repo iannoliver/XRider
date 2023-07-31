@@ -41,6 +41,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.DAO;
 import java.awt.Cursor;
+import com.toedter.calendar.JDateChooser;
 
 public class Produtos extends JDialog {
 	DAO dao = new DAO();
@@ -70,11 +71,14 @@ public class Produtos extends JDialog {
 	private JButton btnAdicionar;
 	private JButton btnEditar;
 	private JButton btnExcluir;
-	private JButton btnBuscar;
 	private JList listFornecedores;
 	private JTextPane txtDescricao;
 	private JButton btnCarregarFoto;
 	private JLabel lblFoto;
+	private JTextField textField;
+	private JTextField txtCusto;
+	private JTextField txtLucro;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -95,7 +99,7 @@ public class Produtos extends JDialog {
 	public Produtos() {
 		setTitle("Produtos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IconBike.png")));
-		setBounds(100, 100, 616, 442);
+		setBounds(100, 100, 743, 497);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -112,7 +116,7 @@ public class Produtos extends JDialog {
 			btnLimpar.setToolTipText("Limpar");
 			btnLimpar.setContentAreaFilled(false);
 			btnLimpar.setBorder(null);
-			btnLimpar.setBounds(323, 344, 48, 48);
+			btnLimpar.setBounds(568, 399, 48, 48);
 			contentPanel.add(btnLimpar);
 		}
 		{
@@ -128,7 +132,7 @@ public class Produtos extends JDialog {
 			btnExcluir.setEnabled(false);
 			btnExcluir.setContentAreaFilled(false);
 			btnExcluir.setBorder(null);
-			btnExcluir.setBounds(254, 344, 48, 48);
+			btnExcluir.setBounds(432, 399, 48, 48);
 			contentPanel.add(btnExcluir);
 		}
 		{
@@ -144,7 +148,7 @@ public class Produtos extends JDialog {
 			btnEditar.setEnabled(false);
 			btnEditar.setContentAreaFilled(false);
 			btnEditar.setBorder(null);
-			btnEditar.setBounds(173, 344, 48, 48);
+			btnEditar.setBounds(294, 399, 48, 48);
 			contentPanel.add(btnEditar);
 		}
 		{
@@ -159,27 +163,13 @@ public class Produtos extends JDialog {
 			btnAdicionar.setToolTipText("Adicionar");
 			btnAdicionar.setContentAreaFilled(false);
 			btnAdicionar.setBorder(null);
-			btnAdicionar.setBounds(88, 344, 48, 48);
+			btnAdicionar.setBounds(135, 399, 48, 48);
 			contentPanel.add(btnAdicionar);
 		}
-		
-		scrollPaneFornecedor = new JScrollPane();
-		scrollPaneFornecedor.setVisible(false);
-		scrollPaneFornecedor.setBounds(407, 60, 175, 32);
-		contentPanel.add(scrollPaneFornecedor);
-		
-		listFornecedores = new JList();
-		scrollPaneFornecedor.setViewportView(listFornecedores);
-		listFornecedores.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				buscarListaFornecedores();
-			}
-		});
 		{
-			JLabel lblId = new JLabel("ID:");
-			lblId.setBounds(10, 31, 46, 14);
-			contentPanel.add(lblId);
+			JLabel lblCodigo = new JLabel("Codigo:");
+			lblCodigo.setBounds(10, 31, 46, 14);
+			contentPanel.add(lblCodigo);
 		}
 		{
 			JLabel lblDescrio = new JLabel("Descrição:");
@@ -187,9 +177,9 @@ public class Produtos extends JDialog {
 			contentPanel.add(lblDescrio);
 		}
 		{
-			JLabel lblNewLabel_1 = new JLabel("Produto:");
-			lblNewLabel_1.setBounds(10, 56, 73, 14);
-			contentPanel.add(lblNewLabel_1);
+			JLabel lblProduto = new JLabel("Produto:");
+			lblProduto.setBounds(10, 56, 73, 14);
+			contentPanel.add(lblProduto);
 		}
 		{
 			JLabel lblNewLabel_1_1 = new JLabel("Foto:");
@@ -198,14 +188,14 @@ public class Produtos extends JDialog {
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Estoque:");
-			lblNewLabel_2.setBounds(344, 160, 62, 14);
+			lblNewLabel_2.setBounds(469, 272, 62, 14);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			txtID = new JTextField();
 			txtID.setEditable(false);
 			txtID.setColumns(10);
-			txtID.setBounds(36, 28, 55, 20);
+			txtID.setBounds(55, 28, 55, 20);
 			contentPanel.add(txtID);
 		}
 		{
@@ -217,66 +207,80 @@ public class Produtos extends JDialog {
 		{
 			txtEstoque = new JTextField();
 			txtEstoque.setColumns(10);
-			txtEstoque.setBounds(394, 157, 196, 20);
+			txtEstoque.setBounds(521, 269, 196, 20);
 			contentPanel.add(txtEstoque);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("EstoqueMin:");
-			lblNewLabel_2.setBounds(323, 135, 62, 14);
+			lblNewLabel_2.setBounds(456, 247, 62, 14);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Valor:");
-			lblNewLabel_2.setBounds(434, 188, 46, 14);
+			lblNewLabel_2.setBounds(558, 300, 46, 14);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			JLabel lblNewLabel = new JLabel("Medida:");
-			lblNewLabel.setBounds(434, 213, 62, 14);
+			lblNewLabel.setBounds(605, 328, 62, 14);
 			contentPanel.add(lblNewLabel);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("Armazenagem:");
-			lblNewLabel_2.setBounds(312, 241, 73, 14);
+			lblNewLabel_2.setBounds(438, 356, 73, 14);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			txtEstoqueMin = new JTextField();
 			txtEstoqueMin.setColumns(10);
-			txtEstoqueMin.setBounds(394, 129, 196, 20);
+			txtEstoqueMin.setBounds(521, 241, 196, 20);
 			contentPanel.add(txtEstoqueMin);
 		}
 		{
 			txtValor = new JTextField();
 			txtValor.setColumns(10);
-			txtValor.setBounds(470, 185, 120, 20);
+			txtValor.setBounds(597, 297, 120, 20);
 			contentPanel.add(txtValor);
 		}
 		{
 			txtArmazenagem = new JTextField();
 			txtArmazenagem.setColumns(10);
-			txtArmazenagem.setBounds(394, 238, 196, 20);
+			txtArmazenagem.setBounds(521, 353, 196, 20);
 			contentPanel.add(txtArmazenagem);
 		}
 		{
 			cboMedida = new JComboBox();
 			cboMedida.setModel(new DefaultComboBoxModel(new String[] {"", "UN ", "CX ", "PC ", "Kg ", "m"}));
-			cboMedida.setBounds(480, 211, 62, 18);
+			cboMedida.setBounds(655, 324, 62, 18);
 			contentPanel.add(cboMedida);
 		}
 		
 		txtDescricao = new JTextPane();
 		txtDescricao.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		txtDescricao.setBounds(82, 81, 231, 121);
+		txtDescricao.setBounds(68, 81, 231, 121);
 		contentPanel.add(txtDescricao);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Fornecedores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setName("Cliente");
 		panel.setToolTipText("Cliente");
-		panel.setBounds(325, 21, 265, 74);
+		panel.setBounds(323, 11, 265, 74);
 		contentPanel.add(panel);
 		panel.setLayout(null);
+		
+		scrollPaneFornecedor = new JScrollPane();
+		scrollPaneFornecedor.setBounds(80, 29, 175, 32);
+		panel.add(scrollPaneFornecedor);
+		
+		listFornecedores = new JList();
+		scrollPaneFornecedor.setViewportView(listFornecedores);
+		listFornecedores.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				buscarListaFornecedores();
+			}
+		});
+		scrollPaneFornecedor.setVisible(false);
 		
 		JLabel lblNewLabel = new JLabel("Fornecedor:");
 		lblNewLabel.setBounds(10, 22, 70, 14);
@@ -307,30 +311,14 @@ public class Produtos extends JDialog {
 			JLabel lblNewLabel_4 = new JLabel("");
 			lblNewLabel_4.setOpaque(true);
 			lblNewLabel_4.setBackground(new Color(36, 185, 182));
-			lblNewLabel_4.setBounds(0, 329, 600, 74);
+			lblNewLabel_4.setBounds(0, 384, 717, 74);
 			contentPanel.add(lblNewLabel_4);
-		}
-		{
-			btnBuscar = new JButton("");
-			btnBuscar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					buscar();
-				}
-			});
-			btnBuscar.setIcon(new ImageIcon(Produtos.class.getResource("/img/PesquisarCli.png")));
-			btnBuscar.setToolTipText("Buscar");
-			btnBuscar.setContentAreaFilled(false);
-			btnBuscar.setBorder(null);
-			btnBuscar.setBounds(254, 27, 48, 48);
-			contentPanel.add(btnBuscar);
-			
-			getRootPane().setDefaultButton(btnBuscar);
 		}
 		
 		lblFoto = new JLabel("");
 		lblFoto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		lblFoto.setIcon(new ImageIcon(Produtos.class.getResource("/img/photo.png")));
-		lblFoto.setBounds(47, 213, 80, 74);
+		lblFoto.setBounds(47, 213, 219, 157);
 		contentPanel.add(lblFoto);
 		
 		btnCarregarFoto = new JButton("Carregar Foto");
@@ -340,8 +328,65 @@ public class Produtos extends JDialog {
 				
 			}
 		});
-		btnCarregarFoto.setBounds(143, 264, 120, 23);
+		btnCarregarFoto.setBounds(302, 350, 120, 23);
 		contentPanel.add(btnCarregarFoto);
+		
+		JLabel lblFabricante = new JLabel("Fabricante:");
+		lblFabricante.setBounds(456, 222, 62, 14);
+		contentPanel.add(lblFabricante);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(521, 216, 196, 20);
+		contentPanel.add(textField);
+		
+		JLabel lblUnidade = new JLabel("Unidade:");
+		lblUnidade.setBounds(456, 197, 62, 14);
+		contentPanel.add(lblUnidade);
+		
+		JLabel lblCusto = new JLabel("Custo:");
+		lblCusto.setBounds(276, 247, 62, 14);
+		contentPanel.add(lblCusto);
+		
+		JLabel lblLucro = new JLabel("Lucro:");
+		lblLucro.setBounds(276, 269, 62, 14);
+		contentPanel.add(lblLucro);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(521, 149, 146, 20);
+		contentPanel.add(dateChooser);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(521, 118, 146, 20);
+		contentPanel.add(dateChooser_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("DataEntrada:");
+		lblNewLabel_1.setBounds(438, 124, 73, 14);
+		contentPanel.add(lblNewLabel_1);
+		{
+			JLabel lblNewLabel_1_1 = new JLabel("DataValidade:");
+			lblNewLabel_1_1.setBounds(438, 149, 73, 14);
+			contentPanel.add(lblNewLabel_1_1);
+		}
+		
+		txtCusto = new JTextField();
+		txtCusto.setBounds(312, 244, 86, 20);
+		contentPanel.add(txtCusto);
+		txtCusto.setColumns(10);
+		
+		txtLucro = new JTextField();
+		txtLucro.setColumns(10);
+		txtLucro.setBounds(312, 269, 86, 20);
+		contentPanel.add(txtLucro);
+		
+		JLabel lblLote = new JLabel("Lote:");
+		lblLote.setBounds(456, 99, 46, 14);
+		contentPanel.add(lblLote);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(518, 93, 86, 20);
+		contentPanel.add(textField_1);
+		textField_1.setColumns(10);
 	}
 	
 	private void limparCampos() {
@@ -358,7 +403,6 @@ public class Produtos extends JDialog {
 		btnAdicionar.setEnabled(true);
 		btnEditar.setEnabled(false);
 		btnExcluir.setEnabled(false);
-		btnBuscar.setEnabled(true);
 		scrollPaneFornecedor.setVisible(false);
 		lblFoto.setIcon(new ImageIcon(Principal.class.getResource("/img/photo.png")));
 	}
@@ -479,64 +523,6 @@ public class Produtos extends JDialog {
 			}
 		}
 		}// Fim do método adicionar
-		
-	
-	private void buscar () {
-		//captura do número da OS (sem usar a caixa de texto)
-		String idproduto = JOptionPane.showInputDialog("Id do Produto");
-		String read = "select * from produtos where idproduto = ?";
-		//Tratramento de exceções
-		try {
-			//abrir a conexão
-			con = dao.conectar();
-			//PREPARA A EXECUÇÃO DA QUERY(instrução SQL - CRUD Read) 
-			pst = con.prepareStatement(read);
-			//substituir a ?(parâmetro) pelonúmero da OS
-			pst.setString(1,  idproduto);
-			//executar a Query e buscar o resultado
-			rs = pst.executeQuery();
-			// uso da estrutura IFELSE para verificar se existe o contato
-			// rs.next() -> se existir um contato no banco
-			if (rs.next()) {
-				//preeccher as caixas de texto com informações
-				txtID.setText(rs.getString(1));
-				txtProduto.setText(rs.getString(2));
-				txtDescricao.setText(rs.getString(4));
-				Blob blob = (Blob) rs.getBlob(5);
-				txtEstoque.setText(rs.getString(6));
-				txtEstoqueMin.setText(rs.getString(7));
-				txtValor.setText(rs.getString(8));
-				cboMedida.setSelectedItem(rs.getString(9));
-				txtArmazenagem.setText(rs.getString(10));
-				txtIDF.setText(rs.getString(11));
-				btnAdicionar.setEnabled(false);
-				btnEditar.setEnabled(true);
-				btnExcluir.setEnabled(true);
-				btnBuscar.setEnabled(false);
-				
-				byte[] img = blob.getBytes(1, (int) blob.length());
-				BufferedImage imagem = null;
-				try {
-					imagem = ImageIO.read(new ByteArrayInputStream(img));
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-				ImageIcon icone = new ImageIcon(imagem);
-				Icon foto = new ImageIcon(icone.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
-				lblFoto.setIcon(foto);
-			
-			} else {
-				//se não exisir um contato
-				JOptionPane.showMessageDialog(null, "Produto Inexistente");
-				btnAdicionar.setEnabled(true);
-				btnBuscar.setEnabled(false);
-			}
-			// fechar a conexão(importante)
-			con.close();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
 	
 	private void excluir() {
 		//System.out.println("Teste do botão");

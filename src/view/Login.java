@@ -144,6 +144,8 @@ public class Login extends JFrame {
 						principal.btnUsuarios.setEnabled(true);
 						//mudar a cor do Rodapé
 						principal.panelRodapé.setBackground(Color.RED);
+						principal.lblUsu.setBackground(Color.WHITE);
+						principal.lblData.setBackground(Color.WHITE);
 						//fechar a tela de login
 						this.dispose();
 					} else {

@@ -32,12 +32,13 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblStatus;
 	public JLabel panelRodapé;
-	private JLabel lblData;
+	public JLabel lblData;
 	private JLabel lblNewLabel_2;
 	//está label abaixo será alterada pela tela de login
 	public JLabel lblUsu;
 	public JButton btnUsuarios;
 	public JButton btnRelatorio;
+	private JLabel lblUsuario;
 
 	/**
 	 * Launch the application.
@@ -88,7 +89,7 @@ public class Principal extends JFrame {
 		lblUsu.setBounds(265, 537, 173, 14);
 		contentPane.add(lblUsu);
 		
-		JLabel lblUsuario = new JLabel("Usuário:");
+		lblUsuario = new JLabel("Usuário:");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUsuario.setBounds(197, 537, 73, 13);
 		contentPane.add(lblUsuario);
@@ -108,7 +109,7 @@ public class Principal extends JFrame {
 		panelRodapé = new JLabel("");
 		panelRodapé.setOpaque(true);
 		panelRodapé.setBackground(new Color(12, 163, 143));
-		panelRodapé.setBounds(0, 423, 784, 138);
+		panelRodapé.setBounds(0, 433, 784, 138);
 		contentPane.add(panelRodapé);
 		btnUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/img/6789698_interface_navigation_ui_user_icon.png")));
 		btnUsuarios.setToolTipText("Usuários");
