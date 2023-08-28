@@ -1,25 +1,8 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-//import com.toedter.calendar.JDateChooser;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,24 +22,46 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.toedter.calendar.JDateChooser;
+//import com.toedter.calendar.JDateChooser;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+
+import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 
 import model.DAO;
-import utils.Validador;
-import java.awt.Toolkit;
 
-public class Produtos extends JDialog {
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import javax.swing.JList;
+import java.awt.SystemColor;
+import java.awt.Cursor;
+
+import com.toedter.calendar.JDateChooser;
+import java.awt.ScrollPane;
+import javax.swing.SwingConstants;
+
+public class Produtoss extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	// Instance objects JDBC
@@ -97,7 +102,6 @@ public class Produtos extends JDialog {
 	private JScrollPane scrollprodutos;
 	private JButton btnAlterar;
 	private JButton btnExcluir;
-	private JButton btnPesquisar;
 	// private JDateChooser dateEntrada;
 	// private JDateChooser dateValidade;
 
@@ -108,7 +112,7 @@ public class Produtos extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Produtos dialog = new Produtos();
+					Produtoss dialog = new Produtoss();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -121,13 +125,13 @@ public class Produtos extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Produtos() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IconBike.png")));
+	public Produtoss() {
 		getContentPane().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				scrollPane.setVisible(false);
-				scrollprodutos.setVisible(false);
+			System.out.println("FODA-SE");
+			scrollprodutos.setVisible(false);
+			scrollPane.setVisible(false);
 			}
 		});
 		addWindowListener(new WindowAdapter() {
@@ -143,69 +147,8 @@ public class Produtos extends JDialog {
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(null);
 
-		JButton btnLimparCampos = new JButton("");
-		btnLimparCampos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limparCampos();
-			}
-		});
-
-		btnAdicionar = new JButton("");
-		btnAdicionar.setContentAreaFilled(false);
-		btnAdicionar.setToolTipText("Adicionar produto");
-		btnAdicionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAdicionar.setIcon(new ImageIcon(Produtos.class.getResource("/img/Add.png")));
-		btnAdicionar.setBorder(null);
-		btnAdicionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				inserirProduto();
-				IsImageLoaded = false;
-			}
-		});
-
-		btnAlterar = new JButton("");
-		btnAlterar.setEnabled(false);
-		btnAlterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				editar();
-				IsImageLoaded = false;
-
-			}
-		});
-
-		btnExcluir = new JButton("");
-		btnExcluir.setEnabled(false);
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				excluir();
-				IsImageLoaded = false;
-			}
-		});
-		btnExcluir.setToolTipText("Excluir produto");
-		btnExcluir.setIcon(new ImageIcon(Produtos.class.getResource("/img/Lixeira2.png")));
-		btnExcluir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnExcluir.setBorder(null);
-		btnExcluir.setContentAreaFilled(false);
-		btnExcluir.setBounds(303, 497, 64, 64);
-		getContentPane().add(btnExcluir);
-		btnAlterar.setToolTipText("Editar produto");
-		btnAlterar.setIcon(new ImageIcon(Produtos.class.getResource("/img/EditarCli.png")));
-		btnAlterar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAlterar.setContentAreaFilled(false);
-		btnAlterar.setBorder(null);
-		btnAlterar.setBounds(452, 497, 64, 64);
-		getContentPane().add(btnAlterar);
-		btnAdicionar.setBounds(179, 497, 64, 64);
-		getContentPane().add(btnAdicionar);
-		btnLimparCampos.setIcon(new ImageIcon(Produtos.class.getResource("/img/Burracha.png")));
-		btnLimparCampos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnLimparCampos.setToolTipText("Limpar campos");
-		btnLimparCampos.setContentAreaFilled(false);
-		btnLimparCampos.setBorder(null);
-		btnLimparCampos.setBounds(76, 497, 64, 64);
-		getContentPane().add(btnLimparCampos);
-
 		scrollPane = new JScrollPane();
+		scrollPane.setVisible(false);
 		scrollPane.setBounds(405, 71, 153, 64);
 		getContentPane().add(scrollPane);
 
@@ -214,7 +157,7 @@ public class Produtos extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int linha = listFornecedor.getSelectedIndex();
-				String comando = "Select * from fornecedores where razao like '" + txtFornecedor.getText() + "%'"
+				String comando = "Select * from fornecedoresDida where razao like '" + txtFornecedor.getText() + "%'"
 						+ " order by razao limit " + (linha) + ", 1";
 				if (linha >= 0) {
 					try {
@@ -253,18 +196,15 @@ public class Produtos extends JDialog {
 		lblButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
 				pesquisarBarcode();
 			}
 		});
-		lblButton.setIcon(new ImageIcon(Produtos.class.getResource("/img/barcode.png")));
+		lblButton.setIcon(new ImageIcon(Produtoss.class.getResource("/img/barcode.png")));
 		lblButton.setBounds(22, 31, 64, 45);
 		getContentPane().add(lblButton);
 
 		txtBarcode = new JTextField();
 		txtBarcode.addKeyListener(new KeyAdapter() {
-			// leitor de c�digo de barras
-			// evento ao pressionar uma tecla espec�fica (ENTER)
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -281,22 +221,18 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(90, 88, 103, 20);
+		txtCodigo.setBounds(102, 88, 103, 20);
 		getContentPane().add(txtCodigo);
 		txtCodigo.setColumns(10);
 
-		btnPesquisar = new JButton("");
-		btnPesquisar.setContentAreaFilled(false);
-		btnPesquisar.setBorder(null);
-		btnPesquisar.setIcon(new ImageIcon(Produtos.class.getResource("/img/PesquisarCli.png")));
-		btnPesquisar.setToolTipText("Pesquisar");
+		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(SystemColor.textHighlight);
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pesquisarProduto();
 			}
 		});
-		btnPesquisar.setBounds(203, 71, 48, 48);
+		btnPesquisar.setBounds(203, 87, 95, 23);
 		getContentPane().add(btnPesquisar);
 
 		JPanel panel = new JPanel();
@@ -315,6 +251,11 @@ public class Produtos extends JDialog {
 		txtFornecedor.setBounds(25, 26, 152, 20);
 		panel.add(txtFornecedor);
 		txtFornecedor.setColumns(10);
+
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(Produtoss.class.getResource("/img/search.png")));
+		lblNewLabel_2.setBounds(185, 22, 24, 24);
+		panel.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("ID");
 		lblNewLabel_3.setBounds(243, 29, 24, 14);
@@ -364,8 +305,7 @@ public class Produtos extends JDialog {
 		txtValor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-			onlyNum(e);
-			}
+				onlyNum(e);}
 		});
 		txtValor.setBounds(89, 379, 103, 20);
 		getContentPane().add(txtValor);
@@ -395,8 +335,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblNewLabel_11);
 
 		txtFabricante = new JTextField();
-		txtFabricante.addKeyListener(new KeyAdapter() {
-		});
 		txtFabricante.setBounds(303, 283, 147, 20);
 		getContentPane().add(txtFabricante);
 		txtFabricante.setColumns(10);
@@ -408,7 +346,8 @@ public class Produtos extends JDialog {
 		txtEstoque = new JTextField();
 		txtEstoque.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {onlyNum(e);
+			public void keyTyped(KeyEvent e) {
+				onlyNum(e);
 			}
 		});
 		txtEstoque.setBounds(89, 329, 51, 20);
@@ -420,6 +359,12 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblNewLabel_13);
 
 		txtEstoquemin = new JTextField();
+		txtEstoquemin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				onlyNum(e);
+			}
+		});
 		txtEstoquemin.setColumns(10);
 		txtEstoquemin.setBounds(267, 329, 51, 20);
 		getContentPane().add(txtEstoquemin);
@@ -442,23 +387,74 @@ public class Produtos extends JDialog {
 		getContentPane().add(txtLocal);
 		txtLocal.setColumns(10);
 
+		btnAdicionar = new JButton("");
+		btnAdicionar.setContentAreaFilled(false);
+		btnAdicionar.setToolTipText("Adicionar produto");
+		btnAdicionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAdicionar.setIcon(new ImageIcon(Produtoss.class.getResource("/img/cliAdd.png")));
+		btnAdicionar.setBorder(null);
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inserirProduto();
+				
+			}
+		});
+		btnAdicionar.setBounds(536, 470, 64, 64);
+		getContentPane().add(btnAdicionar);
+
+		btnAlterar = new JButton("");
+		btnAlterar.setEnabled(false);
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editar();
+				
+
+			}
+		});
+		btnAlterar.setToolTipText("Editar produto");
+		btnAlterar.setIcon(new ImageIcon(Produtoss.class.getResource("/img/cliEdit.png")));
+		btnAlterar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAlterar.setContentAreaFilled(false);
+		btnAlterar.setBorder(null);
+		btnAlterar.setBounds(614, 470, 64, 64);
+		getContentPane().add(btnAlterar);
+
+		btnExcluir = new JButton("");
+		btnExcluir.setEnabled(false);
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluir();
+			
+			}
+		});
+		btnExcluir.setToolTipText("Excluir produto");
+		btnExcluir.setIcon(new ImageIcon(Produtoss.class.getResource("/img/cliRemove.png")));
+		btnExcluir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnExcluir.setBorder(null);
+		btnExcluir.setContentAreaFilled(false);
+		btnExcluir.setBounds(691, 470, 64, 64);
+		getContentPane().add(btnExcluir);
+
 		JLabel lblNewLabel_4_1 = new JLabel("Lote");
 		lblNewLabel_4_1.setBounds(40, 286, 46, 14);
 		getContentPane().add(lblNewLabel_4_1);
 
 		txtLote = new JTextField();
-//		txtLote.addKeyListener(new KeyAdapter() {
-//			
-//		});
+		txtLote.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			onlyNum(e);
+			}
+		});
 		txtLote.setColumns(10);
-		txtLote.setBounds(90, 283, 121, 20);
+		txtLote.setBounds(90, 283, 50, 20);
 		getContentPane().add(txtLote);
 
 		lblimg = new JLabel("");
 		lblimg.setHorizontalAlignment(SwingConstants.CENTER);
 		lblimg.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblimg.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		lblimg.setIcon(new ImageIcon(Produtos.class.getResource("/img/CAm.png")));
+		lblimg.setIcon(new ImageIcon(Produtoss.class.getResource("/img/produtosIcon.png")));
 		lblimg.setBounds(496, 129, 256, 256);
 		getContentPane().add(lblimg);
 
@@ -471,6 +467,20 @@ public class Produtos extends JDialog {
 		btnImg.setForeground(SystemColor.textHighlight);
 		btnImg.setBounds(611, 395, 141, 23);
 		getContentPane().add(btnImg);
+
+		JButton btnLimparCampos = new JButton("");
+		btnLimparCampos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+			}
+		});
+		btnLimparCampos.setIcon(new ImageIcon(Produtoss.class.getResource("/img/erase.png")));
+		btnLimparCampos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLimparCampos.setToolTipText("Limpar campos");
+		btnLimparCampos.setContentAreaFilled(false);
+		btnLimparCampos.setBorder(null);
+		btnLimparCampos.setBounds(22, 470, 64, 64);
+		getContentPane().add(btnLimparCampos);
 
 		dataEntrada = new JDateChooser();
 		dataEntrada.setEnabled(false);
@@ -506,32 +516,12 @@ public class Produtos extends JDialog {
 		});
 		txtDescricao.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setBackground(new Color(77, 143, 149));
-		lblNewLabel.setBounds(0, 492, 784, 69);
-		getContentPane().add(lblNewLabel);
-
-		
-		
-		txtBarcode.setDocument(new Validador(30));
-		txtCodigo.setDocument(new Validador(50));
-		txtProduto.setDocument(new Validador(45));
-		txtDescricao.setDocument(new Validador(200));
-		txtLote.setDocument(new Validador(45));
-		txtFabricante.setDocument(new Validador(45));
-//		txtEstoque.setDocument(new Validador(3));
-//		txtEstoquemin.setDocument(new Validador(3));
-//		txtValor.setDocument(new Validador(3));
-//		txtLucro.setDocument(new Validador(3));
-		txtLocal.setDocument(new Validador(50));
 	}// fim do construtor
-
 
 	private void pesquisarFornecedor() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listFornecedor.setModel(modelo);
-		String comando = "Select * from fornecedores where razao like '" + txtFornecedor.getText() + "%'"
+		String comando = "Select * from fornecedoresDida where razao like '" + txtFornecedor.getText() + "%'"
 				+ " order by razao ";
 		try {
 			con = dao.conectar();
@@ -558,13 +548,11 @@ public class Produtos extends JDialog {
 
 	private void pesquisarProduto() {
 		// System.out.println("teste bot�o pesquisar produto");
-		String comando2 = "select * from produtos where idproduto = ?";
-		String comando = "select * from produtos inner join fornecedores";
-	
+		String comando = "select * from produtosDida where idproduto = ?";
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(comando);
-//			pst.setString(1, txtCodigo.getText());
+			pst.setString(1, txtCodigo.getText());
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 
@@ -594,7 +582,6 @@ public class Produtos extends JDialog {
 				txtLote.setText(rs.getString(14));
 				txtLucro.setText(rs.getString(15));
 				txtId.setText(rs.getString(16));
-				txtFornecedor.setText(rs.getString(18));
 				byte[] img = blob.getBytes(1, (int) blob.length());
 				BufferedImage imagem = null;
 				try {
@@ -627,7 +614,7 @@ public class Produtos extends JDialog {
 
 //	private void pesquisarBarcode() {
 //		// System.out.println("teste bot�o pesquisar produto");
-//		String comando = "select * from produtos where barcode = ?";
+//		String comando = "select * from produtosDida where barcode = ?";
 //		try {
 //			Connection con = dao.conectar();
 //			PreparedStatement pst = con.prepareStatement(comando);
@@ -763,10 +750,10 @@ public class Produtos extends JDialog {
 
 			/**
 			 * Comando insert para criacao de dados no produtos Dida = didatico, versao do
-			 * professor O banco de dados produtos tambem e diferente Total de 12
+			 * professor O banco de dados produtosDida tambem e diferente Total de 12
 			 * colunas
 			 */
-			String comando = "insert into produtos (barcode,produto,descricao,fabricante,datavalidade,foto,estoque,estoquemin,unidademedida,localarmazenagem,valor,lote,lucro,idFornecedor) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String comando = "insert into produtosDida (barcode,produto,descricao,fabricante,datavalidade,foto,estoque,estoquemin,unidademedida,localarmazenagem,valor,lote,lucro,idFornecedor) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			try {
 
 //			Connection con = dao.conectar();
@@ -892,28 +879,34 @@ public class Produtos extends JDialog {
 
 			try {
 
-				String comando = "update produtos set barcode=?,produto=?,fabricante=?"
+				String comando = "update produtosDida set barcode=?,produto=?,fabricante=?"
 						+ ",descricao=?,datavalidade=?,foto=?,estoque=?,estoquemin=?"
 						+ ",valor=?,unidademedida=?,localarmazenagem=?,lote=?,lucro=? where idproduto=?;";
-
-				String comandoWithoutImg = "update produtos set barcode=?,produto=?,fabricante=?"
+				String comandoWithoutImg = "update produtosDida set barcode=?,produto=?,fabricante=?"
 						+ ",descricao=?,datavalidade=?,estoque=?,estoquemin=?"
 						+ ",valor=?,unidademedida=?,localarmazenagem=?,lote=?,lucro=? where idproduto=?;";
-
+				
 				con = dao.conectar();
+				pst = con.prepareStatement(comando);
 
-				if (IsImageLoaded) {
+				// id por ultimo
+				pst.setString(14, txtCodigo.getText());
+				// resto
 
-					pst = con.prepareStatement(comando);
+				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
+				String dataformada = formatador.format(dataValidade.getDate());
 
-					pst.setString(1, txtBarcode.getText());
-					pst.setString(2, txtProduto.getText());
-					pst.setString(3, txtFabricante.getText());
-					pst.setString(4, txtDescricao.getText());
-					SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
-					String dataformada = formatador.format(dataValidade.getDate());
-					pst.setString(5, dataformada);
-					pst.setBlob(6, fis);
+				
+				pst.setString(1, txtBarcode.getText());
+				pst.setString(2, txtProduto.getText());
+				pst.setString(3, txtFabricante.getText());
+				pst.setString(4, txtDescricao.getText());
+				pst.setString(5, dataformada);
+				
+				if(IsImageLoaded) {
+					System.out.println("modified");
+					
+					pst.setBlob(6,fis);
 					pst.setString(7, txtEstoque.getText());
 					pst.setString(8, txtEstoquemin.getText());
 					pst.setString(9, txtValor.getText());
@@ -921,34 +914,40 @@ public class Produtos extends JDialog {
 					pst.setString(11, txtLocal.getText());
 					pst.setString(12, txtLote.getText());
 					pst.setString(13, txtLucro.getText());
-					// id
-					pst.setString(14, txtCodigo.getText());
-				} else {
-					pst = con.prepareStatement(comandoWithoutImg);
-
-					pst.setString(1, txtBarcode.getText());
-					pst.setString(2, txtProduto.getText());
-					pst.setString(3, txtFabricante.getText());
-					pst.setString(4, txtDescricao.getText());
-					SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
-					String dataformada = formatador.format(dataValidade.getDate());
-					pst.setString(5, dataformada);
+				}else {
+					System.out.println("not modified");
+					
 					pst.setString(6, txtEstoque.getText());
 					pst.setString(7, txtEstoquemin.getText());
 					pst.setString(8, txtValor.getText());
-					pst.setString(9, (String) cboUnidade.getSelectedItem());
-					pst.setString(10, txtLocal.getText());
-					pst.setString(11, txtLote.getText());
-					pst.setString(12, txtLucro.getText());
-					// id
-					pst.setString(13, txtCodigo.getText());
+					pst.setString(11, (String) cboUnidade.getSelectedItem());
+					pst.setString(12, txtLocal.getText());
+					pst.setString(13, txtLote.getText());
+					pst.setString(14, txtLucro.getText());
 				}
-				pst.executeUpdate();
-				con.close();
+				
+				
+				
+//				pst.setString(1, txtBarcode.getText());
+//				pst.setString(2, txtProduto.getText());
+//				pst.setString(3, txtFabricante.getText());
+//				pst.setString(4, txtDescricao.getText());
+//				pst.setString(5, dataformada);
+//								
+//				pst.setString(7, txtEstoque.getText());
+//				pst.setString(8, txtEstoquemin.getText());
+//				pst.setString(9, txtValor.getText());
+//				pst.setString(10, (String) cboUnidade.getSelectedItem());
+//				pst.setString(11, txtLocal.getText());
+//				pst.setString(12, txtLote.getText());
+//				pst.setString(13, txtLucro.getText());
 
+//				pst.setString(12, dataEntrada.getText());
+				
+				pst.executeUpdate();
+				
 				JOptionPane.showMessageDialog(null, "Edição feita com sucesso");
 				limparCampos();
-
 			} catch (SQLException SQLe) {
 				// TODO: handle exception
 				SQLe.printStackTrace();
@@ -962,7 +961,7 @@ public class Produtos extends JDialog {
 	}
 
 	private void excluir() {
-		String comando = "delete from produtos where idproduto = ?";
+		String comando = "delete from produtosDida where idproduto = ?";
 		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a exclusão deste produto?", "Atenção!",
 				JOptionPane.YES_NO_OPTION);
 
@@ -1004,17 +1003,14 @@ public class Produtos extends JDialog {
 		txtLucro.setText(null);
 		cboUnidade.setSelectedItem("");
 		txtLocal.setText(null);
-		lblimg.setIcon(new ImageIcon(Produtos.class.getResource("/img/CAm.png")));
+		lblimg.setIcon(new ImageIcon(Produtoss.class.getResource("/img/produtosIcon.png")));
 		IsImageLoaded = false;
-		dataEntrada.setDate(null);
-		dataValidade.setDate(null);
 		
 		// Validação
 		btnAdicionar.setEnabled(true);
 		btnAlterar.setEnabled(false);
 		btnExcluir.setEnabled(false);
 		
-		txtFornecedor.setText(null);
 //		dataEntrada.setText(null);
 //		dataValidade.setText(null);
 	}
@@ -1023,7 +1019,7 @@ public class Produtos extends JDialog {
 		
 		
 		int linha = listProdutos.getSelectedIndex();
-		String comando = "Select * from produtos where produto like '" + txtProduto.getText() + "%'"
+		String comando = "Select * from produtosDida where produto like '" + txtProduto.getText() + "%'"
 				+ " order by produto limit " + (linha) + ", 1";
 		if (linha >= 0) {
 			try {
@@ -1087,7 +1083,7 @@ public class Produtos extends JDialog {
 
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listProdutos.setModel(modelo);
-		String type = "Select * from produtos where produto like '" + txtProduto.getText() + "%'"
+		String type = "Select * from produtosDida where produto like '" + txtProduto.getText() + "%'"
 				+ " order by produto ";
 		try {
 
@@ -1116,7 +1112,7 @@ public class Produtos extends JDialog {
 	}//
 	private void pesquisarBarcode() {
 		// System.out.println("teste bot�o pesquisar produto");
-		String comando = "select * from produtos where barcode = ?";
+		String comando = "select * from produtosDida where barcode = ?";
 		//validação
 		
 		try {
@@ -1165,7 +1161,7 @@ public class Produtos extends JDialog {
 				lblimg.setIcon(foto);
 
 			} else {
-				JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+//				JOptionPane.showMessageDialog(null, "Produto n�o cadastrado");
 			}
 			con.close();
 		}catch (SQLException SQLe) {
@@ -1180,8 +1176,8 @@ public class Produtos extends JDialog {
 		}
 	}
 	public void onlyNum(KeyEvent e) {
-		String caracteres = "0123456789.";
-		if (!caracteres.contains(e.getKeyChar() + "")) {
+		char c = e.getKeyChar();
+		if (Character.isLetter(c)) {
 			e.consume();
 		}
 	}
