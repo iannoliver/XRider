@@ -39,6 +39,9 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class Servicos extends JDialog {
 	DAO dao = new DAO();
@@ -51,7 +54,7 @@ public class Servicos extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtOS;
 	private JTextField txtData;
-	private JTextField txtBicicleta;
+	private JTextField txtMarca;
 	private JTextField txtDefeito;
 	private JTextField txtValor;
 	private JTextField txtID;
@@ -65,6 +68,24 @@ public class Servicos extends JDialog {
 	private JList listServicos;
 	private JLabel lblNewLabel_4;
 	private JButton btnOS;
+	private JLabel lblMarca;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JLabel lblNewLabel_8;
+	private JTextField txtModelo;
+	private JTextField txtTipo;
+	private JTextField txtCor;
+	private JTextField txtNSerie;
+	private JTextField txtOBSE;
+	private JLabel lblNewLabel_9;
+	private JLabel lblNewLabel_10;
+	private JLabel lblNewLabel_3_1;
+	private JLabel lblNewLabel_3_2;
+	private JLabel lblNewLabel_11;
+	private JLabel lblNewLabel_12;
+	private JTextArea txtDiagnostico;
 
 	/**
 	 * Launch the application.
@@ -87,6 +108,7 @@ public class Servicos extends JDialog {
 	 * Create the dialog.
 	 */
 	public Servicos() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Servicos.class.getResource("/img/IconBike.png")));
 		getContentPane().addMouseListener(new MouseAdapter() {
 			@Override
@@ -96,8 +118,18 @@ public class Servicos extends JDialog {
 		});
 		setTitle("Serviços");
 		setModal(true);
-		setBounds(100, 100, 516, 392);
+		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(null);
+		
+		lblNewLabel_3_2 = new JLabel("Valores e Avaliações");
+		lblNewLabel_3_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_3_2.setBounds(16, 345, 189, 14);
+		getContentPane().add(lblNewLabel_3_2);
+		
+		lblNewLabel_3_1 = new JLabel("Especificações da Bike");
+		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_3_1.setBounds(10, 118, 189, 14);
+		getContentPane().add(lblNewLabel_3_1);
 		
 		JLabel lblOS = new JLabel("OS: ");
 		lblOS.setBounds(28, 30, 46, 14);
@@ -107,16 +139,12 @@ public class Servicos extends JDialog {
 		lblNewLabel.setBounds(28, 63, 46, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Bicicleta: ");
-		lblNewLabel_1.setBounds(28, 102, 73, 14);
-		getContentPane().add(lblNewLabel_1);
-		
 		JLabel lblNewLabel_1_1 = new JLabel("Defeito: ");
-		lblNewLabel_1_1.setBounds(28, 134, 73, 14);
+		lblNewLabel_1_1.setBounds(10, 381, 73, 14);
 		getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Valor: ");
-		lblNewLabel_2.setBounds(28, 169, 62, 14);
+		lblNewLabel_2.setBounds(10, 406, 62, 14);
 		getContentPane().add(lblNewLabel_2);
 		
 		txtOS = new JTextField();
@@ -131,20 +159,20 @@ public class Servicos extends JDialog {
 		getContentPane().add(txtData);
 		txtData.setColumns(10);
 		
-		txtBicicleta = new JTextField();
-		txtBicicleta.setBounds(86, 99, 348, 20);
-		getContentPane().add(txtBicicleta);
-		txtBicicleta.setColumns(10);
-		txtBicicleta.setDocument(new Validador(200));
+		txtMarca = new JTextField();
+		txtMarca.setBounds(60, 150, 348, 20);
+		getContentPane().add(txtMarca);
+		txtMarca.setColumns(10);
+		txtMarca.setDocument(new Validador(200));
 		
 		txtDefeito = new JTextField();
 		txtDefeito.setColumns(10);
-		txtDefeito.setBounds(75, 131, 368, 20);
+		txtDefeito.setBounds(61, 378, 368, 20);
 		getContentPane().add(txtDefeito);
 		txtDefeito.setDocument(new Validador(200));
 		
 		txtValor = new JTextField();
-		txtValor.setBounds(61, 166, 123, 20);
+		txtValor.setBounds(51, 403, 123, 20);
 		getContentPane().add(txtValor);
 		txtValor.setColumns(10);
 		txtValor.setDocument(new Validador(10));
@@ -174,7 +202,7 @@ public class Servicos extends JDialog {
 				adicionar();
 			}
 		});
-		btnAdicionar.setBounds(53, 278, 48, 48);
+		btnAdicionar.setBounds(100, 513, 48, 48);
 		getContentPane().add(btnAdicionar);
 		
 		btnEditar = new JButton("");
@@ -188,7 +216,7 @@ public class Servicos extends JDialog {
 			}
 		});
 		btnEditar.setEnabled(false);
-		btnEditar.setBounds(183, 278, 48, 48);
+		btnEditar.setBounds(292, 513, 48, 48);
 		getContentPane().add(btnEditar);
 		
 		btnExcluir = new JButton("");
@@ -202,7 +230,7 @@ public class Servicos extends JDialog {
 			}
 		});
 		btnExcluir.setEnabled(false);
-		btnExcluir.setBounds(291, 278, 48, 48);
+		btnExcluir.setBounds(461, 513, 48, 48);
 		getContentPane().add(btnExcluir);
 		
 		btnLimpar = new JButton("");
@@ -215,12 +243,12 @@ public class Servicos extends JDialog {
 				limparCampos();
 			}
 		});
-		btnLimpar.setBounds(386, 278, 48, 48);
+		btnLimpar.setBounds(616, 513, 48, 48);
 		getContentPane().add(btnLimpar);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(246, 11, 232, 77);
+		panel.setBounds(301, 11, 232, 77);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -268,7 +296,7 @@ public class Servicos extends JDialog {
 		lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setOpaque(true);
 		lblNewLabel_4.setBackground(new Color(12, 139, 136));
-		lblNewLabel_4.setBounds(0, 246, 500, 107);
+		lblNewLabel_4.setBounds(0, 499, 784, 62);
 		getContentPane().add(lblNewLabel_4);
 		
 		btnOS = new JButton("");
@@ -279,8 +307,83 @@ public class Servicos extends JDialog {
 				imprimirOS();
 			}
 		});
-		btnOS.setBounds(230, 188, 48, 48);
+		btnOS.setBounds(708, 407, 48, 48);
 		getContentPane().add(btnOS);
+		
+		lblMarca = new JLabel("Marca:");
+		lblMarca.setBounds(10, 153, 46, 14);
+		getContentPane().add(lblMarca);
+		
+		lblNewLabel_1 = new JLabel("Modelo:");
+		lblNewLabel_1.setBounds(10, 178, 46, 14);
+		getContentPane().add(lblNewLabel_1);
+		
+		lblNewLabel_5 = new JLabel("Tipo:");
+		lblNewLabel_5.setBounds(10, 206, 46, 14);
+		getContentPane().add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("Cor:");
+		lblNewLabel_6.setBounds(10, 231, 46, 14);
+		getContentPane().add(lblNewLabel_6);
+		
+		lblNewLabel_7 = new JLabel("Numero de Serie:");
+		lblNewLabel_7.setBounds(10, 267, 100, 14);
+		getContentPane().add(lblNewLabel_7);
+		
+		lblNewLabel_8 = new JLabel("Observações Especias:");
+		lblNewLabel_8.setBounds(10, 292, 137, 14);
+		getContentPane().add(lblNewLabel_8);
+		
+		txtModelo = new JTextField();
+		txtModelo.setColumns(10);
+		txtModelo.setBounds(61, 175, 310, 20);
+		getContentPane().add(txtModelo);
+		
+		txtTipo = new JTextField();
+		txtTipo.setColumns(10);
+		txtTipo.setBounds(51, 203, 180, 20);
+		getContentPane().add(txtTipo);
+		
+		txtCor = new JTextField();
+		txtCor.setColumns(10);
+		txtCor.setBounds(51, 228, 156, 20);
+		getContentPane().add(txtCor);
+		
+		txtNSerie = new JTextField();
+		txtNSerie.setColumns(10);
+		txtNSerie.setBounds(117, 264, 348, 20);
+		getContentPane().add(txtNSerie);
+		
+		txtOBSE = new JTextField();
+		txtOBSE.setColumns(10);
+		txtOBSE.setBounds(141, 289, 348, 20);
+		getContentPane().add(txtOBSE);
+		
+		lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setOpaque(true);
+		lblNewLabel_9.setBackground(new Color(33, 146, 123));
+		lblNewLabel_9.setBounds(0, 108, 784, 31);
+		getContentPane().add(lblNewLabel_9);
+		
+		lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setOpaque(true);
+		lblNewLabel_10.setBackground(new Color(33, 146, 123));
+		lblNewLabel_10.setBounds(0, 339, 784, 31);
+		getContentPane().add(lblNewLabel_10);
+		
+		lblNewLabel_11 = new JLabel("Imprimir Ordem de Serviço: ");
+		lblNewLabel_11.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_11.setBounds(533, 424, 180, 14);
+		getContentPane().add(lblNewLabel_11);
+		
+		lblNewLabel_12 = new JLabel("Diagnóstico:");
+		lblNewLabel_12.setBounds(10, 431, 73, 14);
+		getContentPane().add(lblNewLabel_12);
+		
+		txtDiagnostico = new JTextArea();
+		txtDiagnostico.setBorder(new LineBorder(new Color(0, 0, 0)));
+		txtDiagnostico.setBounds(75, 433, 249, 55);
+		getContentPane().add(txtDiagnostico);
 
 	}
 	
@@ -288,7 +391,12 @@ public class Servicos extends JDialog {
 		txtID.setText(null);
 		txtOS.setText(null);
 		txtData.setText(null);
-		txtBicicleta.setText(null);
+		txtMarca.setText(null);
+		txtModelo.setText(null);
+		txtTipo.setText(null);
+		txtCor.setText(null);
+		txtNSerie.setText(null);
+		txtOBSE.setText(null);
 		txtDefeito.setText(null);
 		txtValor.setText(null);
 		txtCliente.setText(null);
@@ -365,11 +473,26 @@ public class Servicos extends JDialog {
 	private void adicionar() {
 		//System.out.println("teste");
 		//Validação de campos obrigatórios
-			if (txtBicicleta.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Preencha a Bicicleta");
-			txtBicicleta.requestFocus();
-		}  else if (txtID.getText().isEmpty()) {
+		if (txtMarca.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha a Marca");
+			txtMarca.requestFocus();
+		}else if (txtModelo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Modelo");
+			txtModelo.requestFocus();
+		}else if (txtTipo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Tipo");
+			txtTipo.requestFocus();
+		}else if (txtCor.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha a Cor");
+			txtCor.requestFocus();
+		}else if (txtNSerie.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Numero de Serie");
+			txtNSerie.requestFocus();
+		}else if (txtID.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o ID");
+			txtID.requestFocus();
+		}else if (txtID.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Diagnóstico");
 			txtID.requestFocus();
 		}else if (txtDefeito.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Preencha o Defeito");
@@ -377,17 +500,23 @@ public class Servicos extends JDialog {
 		} else {
 			
 			//lógica principal
-			String create = "insert into servicos (bicicleta, defeito, valor, idcli) values (?, ?, ?, ?);";
+			String create = "insert into servicos (marca, modelo, tipo, cor, numeroserie, observacoesespeciais, defeito, valor, diagnostico, idcli) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			//tratamento de exceções
 			try {
 				//abrir a conexão
 				con = dao.conectar();
 				//PREPARA A EXECUÇÃO DA QUERY(instrução SQL - CRUD Create)
 				pst = con.prepareStatement(create);
-				pst.setString(1,txtBicicleta.getText());
-				pst.setString(2,txtDefeito.getText());
-				pst.setString(3,txtValor.getText());
-				pst.setString(4,txtID.getText());
+				pst.setString(1,txtMarca.getText());
+				pst.setString(2,txtModelo.getText());
+				pst.setString(3,txtTipo.getText());
+				pst.setString(4,txtCor.getText());
+				pst.setString(5,txtNSerie.getText());
+				pst.setString(6,txtOBSE.getText());
+				pst.setString(7,txtDefeito.getText());
+				pst.setString(8,txtValor.getText());
+				pst.setString(9,txtDiagnostico.getText());
+				pst.setString(10,txtID.getText());
 				//executa a query(Instrução SQL (CRUD - Create)
 				pst.executeUpdate();
 				//confirmar
@@ -423,10 +552,16 @@ public class Servicos extends JDialog {
 				//preeccher as caixas de texto com informações
 				txtOS.setText(rs.getString(1));
 				txtData.setText(rs.getString(2));
-				txtBicicleta.setText(rs.getString(3));
-				txtDefeito.setText(rs.getString(4));
-				txtValor.setText(rs.getString(5));
-				txtID.setText(rs.getString(6));
+				txtMarca.setText(rs.getString(3));
+				txtModelo.setText(rs.getString(4));
+				txtTipo.setText(rs.getString(5));
+				txtCor.setText(rs.getString(6));
+				txtNSerie.setText(rs.getString(7));
+				txtOBSE.setText(rs.getString(8));
+				txtDefeito.setText(rs.getString(9));
+				txtValor.setText(rs.getString(10));
+				txtDiagnostico.setText(rs.getString(11));
+				txtID.setText(rs.getString(12));
 				btnEditar.setEnabled(true);
 				btnExcluir.setEnabled(true);
 				btnBuscar.setEnabled(false);
@@ -476,11 +611,26 @@ public class Servicos extends JDialog {
 	private void editar() {
 		//System.out.println("teste do método editar");
 		//Validação dos campos obrigatórios
-		if (txtBicicleta.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Preencha a Bicicleta");
-			txtBicicleta.requestFocus();
-		}  else if (txtID.getText().isEmpty()) {
+		if (txtMarca.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha a Marca");
+			txtMarca.requestFocus();
+		}else if (txtModelo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Modelo");
+			txtModelo.requestFocus();
+		}else if (txtTipo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Tipo");
+			txtTipo.requestFocus();
+		}else if (txtCor.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha a Cor");
+			txtCor.requestFocus();
+		}else if (txtNSerie.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Numero de Serie");
+			txtNSerie.requestFocus();
+		}else if (txtID.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o ID");
+			txtID.requestFocus();
+		}else if (txtID.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Diagnóstico");
 			txtID.requestFocus();
 		}else if (txtDefeito.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Preencha o Defeito");
@@ -488,17 +638,22 @@ public class Servicos extends JDialog {
 		} else {
 			//Lógica principal
 			//CRUD - Update
-			String update = "update servicos set os = ?, bicicleta = ?, defeito = ?, valor = ? where idcli = ?";
+			String update = "update servicos set os = ?, marca = ?, modelo = ?, tipo = ?, cor = ?, numeroserie = ?, observacoesespeciais = ?, defeito = ?, valor = ?, diagnostico = ? where idcli = ?";
 			try {
 				//abrir conexão
 				con = dao.conectar();
 				//prepara a query (instrução sql)
 				pst = con.prepareStatement(update);
 				pst.setString(1,txtOS.getText());
-				pst.setString(2,txtBicicleta.getText());
-				pst.setString(3,txtDefeito.getText());
-				pst.setString(4,txtValor.getText());
-				pst.setString(5,txtID.getText());
+				pst.setString(2,txtMarca.getText());
+				pst.setString(3,txtModelo.getText());
+				pst.setString(4,txtTipo.getText());
+				pst.setString(5,txtCor.getText());
+				pst.setString(6,txtNSerie.getText());
+				pst.setString(7,txtOBSE.getText());
+				pst.setString(8,txtDefeito.getText());
+				pst.setString(9,txtValor.getText());
+				pst.setString(10,txtID.getText());
 				
 				//executar a query
 				pst.executeUpdate();
@@ -547,28 +702,70 @@ public class Servicos extends JDialog {
 					Paragraph os = new Paragraph ("OS: " + rs.getString(1));
 					os.setAlignment(Element.ALIGN_RIGHT);
 					document.add(os);
-						
-					Paragraph usuario = new Paragraph ("Bicicleta: " + rs.getString(3));
-					usuario.setAlignment(Element.ALIGN_LEFT);
-					document.add(usuario);
 					
-					Paragraph defeito = new Paragraph ("Defeito: " + rs.getString(4));
-					defeito.setAlignment(Element.ALIGN_LEFT);
-					document.add(defeito);
 					
 					Paragraph data = new Paragraph ("Data: " + rs.getString(2));
-					data.setAlignment(Element.ALIGN_LEFT);
+					data.setAlignment(Element.ALIGN_RIGHT);
 					document.add(data);
+						
 					
-					Paragraph valor = new Paragraph ("Valor: " + rs.getString(5));
-					valor.setAlignment(Element.ALIGN_LEFT);
+					Paragraph marca = new Paragraph ("Marca: " + rs.getString(3));
+					marca.setAlignment(Element.ALIGN_LEFT);
+					document.add(marca);
+					
+					
+					Paragraph modelo = new Paragraph ("Modelo: " + rs.getString(4));
+					modelo.setAlignment(Element.ALIGN_LEFT);
+					document.add(modelo);
+					
+					
+					Paragraph tipo = new Paragraph ("Tipo: " + rs.getString(5));
+					tipo.setAlignment(Element.ALIGN_LEFT);
+					document.add(tipo);
+					
+					
+					Paragraph cor = new Paragraph ("Cor: " + rs.getString(6));
+					cor.setAlignment(Element.ALIGN_LEFT);
+					document.add(cor);
+
+					
+					Paragraph nserie = new Paragraph ("Número de Serie: " + rs.getString(7));
+					nserie.setAlignment(Element.ALIGN_LEFT);
+					document.add(nserie);
+					
+					document.add(new Paragraph(" "));
+					document.add(new Paragraph("______________________________________________________________________________"));
+					document.add(new Paragraph(" "));
+					Paragraph p = new Paragraph("Avaliaçôes e Valores");
+					p.setAlignment(Element.ALIGN_CENTER);
+					document.add(p);
+					document.add(new Paragraph(" "));
+					
+					Paragraph ob = new Paragraph ("Observações Especiais: " + rs.getString(8));
+					ob.setAlignment(Element.ALIGN_RIGHT);
+					document.add(ob);
+					
+					Paragraph defeito = new Paragraph ("Defeito: " + rs.getString(9));
+					defeito.setAlignment(Element.ALIGN_RIGHT);
+					document.add(defeito);
+					
+					Paragraph valor = new Paragraph ("Valor: " + rs.getString(10));
+					valor.setAlignment(Element.ALIGN_RIGHT);
 					document.add(valor);
-				
+					
+					document.add(new Paragraph(" "));
+					document.add(new Paragraph("______________________________________________________________________________"));
+					document.add(new Paragraph(" "));
+					Paragraph I = new Paragraph("Informações do Cliente");
+					I.setAlignment(Element.ALIGN_CENTER);
+					document.add(I);
+					document.add(new Paragraph(" "));
+					
 					//imprimir imagens
 					Image imagem = Image.getInstance(Servicos.class.getResource("/img/IconBike.png"));
 					imagem.scaleToFit(192,70);
-					imagem.setAbsolutePosition(20, 600);
-					document.add(imagem);					
+					imagem.setAbsolutePosition(500, 100);
+					document.add(imagem);
 				}
 				// fechar a conexão com o banco
 				con.close();

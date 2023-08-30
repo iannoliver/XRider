@@ -34,6 +34,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Font;
 
 public class Clientes extends JDialog {
 	DAO dao = new DAO();
@@ -59,6 +60,14 @@ public class Clientes extends JDialog {
 	private JComboBox cboUf;
 	private JScrollPane scrollPaneClientes;
 	private JList listClientes;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_2_1;
+	private JLabel lblNewLabel_3_1;
+	private JLabel lblNewLabel_6;
+	private JTextField txtEmail;
 
 	/**
 	 * Launch the application.
@@ -81,27 +90,38 @@ public class Clientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public Clientes() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Clientes.class.getResource("/img/IconBike.png")));
-		setTitle("Cadastro de Clientes");
-		setBounds(100, 100, 546, 436);
+		setTitle("Clientes");
+		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(null);
 		
 		scrollPaneClientes = new JScrollPane();
 		scrollPaneClientes.setVisible(false);
-		scrollPaneClientes.setBounds(59, 78, 263, 63);
+		
+		lblNewLabel_3_1 = new JLabel("Contato / Cliente");
+		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_3_1.setBounds(10, 11, 189, 14);
+		getContentPane().add(lblNewLabel_3_1);
+		
+		lblNewLabel_3 = new JLabel("Endereço");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_3.setBounds(8, 236, 189, 14);
+		getContentPane().add(lblNewLabel_3);
+		scrollPaneClientes.setBounds(59, 57, 263, 63);
 		getContentPane().add(scrollPaneClientes);
 		
 		listClientes = new JList();
+		scrollPaneClientes.setViewportView(listClientes);
 		listClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				buscarClientesLista();
 			}
 		});
-		scrollPaneClientes.setViewportView(listClientes);
 		
 		JLabel lblCliente = new JLabel("Cliente:");
-		lblCliente.setBounds(10, 61, 83, 20);
+		lblCliente.setBounds(10, 42, 83, 20);
 		getContentPane().add(lblCliente);
 		
 		txtCliente = new JTextField();
@@ -111,67 +131,67 @@ public class Clientes extends JDialog {
 				 listarClientes(); 
 			}
 		});
-		txtCliente.setBounds(59, 61, 263, 20);
+		txtCliente.setBounds(59, 42, 263, 20);
 		getContentPane().add(txtCliente);
 		txtCliente.setColumns(10);
 		txtCliente.setDocument(new Validador(50));
 		
 		JLabel lblCliente_1 = new JLabel("Contato:");
-		lblCliente_1.setBounds(10, 92, 83, 20);
+		lblCliente_1.setBounds(10, 104, 83, 20);
 		getContentPane().add(lblCliente_1);
 		
 		txtContato = new JTextField();
 		txtContato.setColumns(10);
-		txtContato.setBounds(59, 92, 173, 20);
+		txtContato.setBounds(67, 104, 173, 20);
 		getContentPane().add(txtContato);
 		txtContato.setDocument(new Validador(15));
 		
 		JLabel lblCliente_1_1 = new JLabel("Endereço:");
-		lblCliente_1_1.setBounds(10, 153, 83, 20);
+		lblCliente_1_1.setBounds(10, 315, 83, 20);
 		getContentPane().add(lblCliente_1_1);
 		
 		txtEndereco = new JTextField();
 		txtEndereco.setColumns(10);
-		txtEndereco.setBounds(69, 153, 199, 20);
+		txtEndereco.setBounds(80, 315, 199, 20);
 		getContentPane().add(txtEndereco);
 		txtEndereco.setDocument(new Validador(50));
 		
 		JLabel lblCliente_1_1_1 = new JLabel("Complemento:");
-		lblCliente_1_1_1.setBounds(278, 153, 83, 20);
+		lblCliente_1_1_1.setBounds(10, 284, 83, 20);
 		getContentPane().add(lblCliente_1_1_1);
 		
 		JLabel lblCliente_1_1_2 = new JLabel("CPF/CNPJ:");
-		lblCliente_1_1_2.setBounds(10, 11, 83, 20);
+		lblCliente_1_1_2.setBounds(10, 73, 83, 20);
 		getContentPane().add(lblCliente_1_1_2);
 		
 		JLabel lblCliente_1_1_3 = new JLabel("Cidade:");
-		lblCliente_1_1_3.setBounds(10, 184, 83, 20);
+		lblCliente_1_1_3.setBounds(10, 346, 83, 20);
 		getContentPane().add(lblCliente_1_1_3);
 		
 		txtComplemento = new JTextField();
 		txtComplemento.setColumns(10);
-		txtComplemento.setBounds(365, 153, 83, 20);
+		txtComplemento.setBounds(101, 284, 83, 20);
 		getContentPane().add(txtComplemento);
 		txtComplemento.setDocument(new Validador(10));
 		
 		txtCpfeCnpj = new JTextField();
 		txtCpfeCnpj.setColumns(10);
-		txtCpfeCnpj.setBounds(80, 11, 199, 20);
+		txtCpfeCnpj.setBounds(80, 73, 199, 20);
 		getContentPane().add(txtCpfeCnpj);
 		txtCpfeCnpj.setDocument(new Validador(14));
 		
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(59, 184, 138, 20);
+		txtCidade.setBounds(59, 346, 138, 20);
 		getContentPane().add(txtCidade);
 		txtCidade.setDocument(new Validador(40));
 		
 		JLabel lblCliente_1_1_3_1 = new JLabel("Cep:");
-		lblCliente_1_1_3_1.setBounds(313, 215, 83, 20);
+		lblCliente_1_1_3_1.setBounds(249, 439, 83, 20);
 		getContentPane().add(lblCliente_1_1_3_1);
 		
 		txtCep = new JTextField();
-		txtCep.setBounds(344, 215, 104, 20);
+		txtCep.setBounds(287, 439, 104, 20);
 		getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 		txtCep.setDocument(new Validador(10));
@@ -188,7 +208,7 @@ public class Clientes extends JDialog {
 		btnExcluir.setBorder(null);
 		btnExcluir.setIcon(new ImageIcon(Clientes.class.getResource("/img/Lixeira2.png")));
 		btnExcluir.setToolTipText("Excluir");
-		btnExcluir.setBounds(107, 338, 48, 48);
+		btnExcluir.setBounds(274, 502, 48, 48);
 		getContentPane().add(btnExcluir);
 		
 		btnAdicionar = new JButton("");
@@ -202,7 +222,7 @@ public class Clientes extends JDialog {
 		btnAdicionar.setBorder(null);
 		btnAdicionar.setIcon(new ImageIcon(Clientes.class.getResource("/img/Add.png")));
 		btnAdicionar.setToolTipText("Adicionar");
-		btnAdicionar.setBounds(35, 338, 48, 48);
+		btnAdicionar.setBounds(59, 502, 48, 48);
 		getContentPane().add(btnAdicionar);
 		
 		btnLimpar = new JButton("");
@@ -216,7 +236,7 @@ public class Clientes extends JDialog {
 		btnLimpar.setContentAreaFilled(false);
 		btnLimpar.setBorder(null);
 		btnLimpar.setToolTipText("Limpar");
-		btnLimpar.setBounds(223, 338, 48, 48);
+		btnLimpar.setBounds(662, 502, 48, 48);
 		getContentPane().add(btnLimpar);
 		
 		btnEditar = new JButton("");
@@ -231,23 +251,23 @@ public class Clientes extends JDialog {
 		btnEditar.setContentAreaFilled(false);
 		btnEditar.setBorder(null);
 		btnEditar.setToolTipText("Editar");
-		btnEditar.setBounds(165, 338, 48, 48);
+		btnEditar.setBounds(455, 502, 48, 48);
 		getContentPane().add(btnEditar);
 		
 		JLabel lblNewLabel = new JLabel("ID: ");
-		lblNewLabel.setBounds(402, 14, 46, 14);
+		lblNewLabel.setBounds(368, 45, 46, 14);
 		getContentPane().add(lblNewLabel);
 		
 		txtIdcli = new JTextField();
 		txtIdcli.setEditable(false);
-		txtIdcli.setBounds(430, 11, 59, 20);
+		txtIdcli.setBounds(401, 42, 59, 20);
 		getContentPane().add(txtIdcli);
 		txtIdcli.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setBackground(new Color(33, 146, 123));
-		lblNewLabel_1.setBounds(0, 316, 530, 81);
+		lblNewLabel_1.setBounds(0, 480, 784, 81);
 		getContentPane().add(lblNewLabel_1);
 		
 		JButton btnBuscaCep = new JButton("");
@@ -260,37 +280,70 @@ public class Clientes extends JDialog {
 		btnBuscaCep.setBorder(null);
 		btnBuscaCep.setToolTipText("BuscaCep");
 		btnBuscaCep.setIcon(new ImageIcon(Clientes.class.getResource("/img/BuscaCEP.png")));
-		btnBuscaCep.setBounds(455, 199, 48, 48);
+		btnBuscaCep.setBounds(401, 411, 48, 48);
 		getContentPane().add(btnBuscaCep);
 		
 		JLabel lblCliente_1_1_3_2 = new JLabel("Bairro:");
-		lblCliente_1_1_3_2.setBounds(10, 215, 83, 20);
+		lblCliente_1_1_3_2.setBounds(10, 377, 83, 20);
 		getContentPane().add(lblCliente_1_1_3_2);
 		
 		JLabel lblCliente_1_1_3_2_1 = new JLabel("Uf :");
-		lblCliente_1_1_3_2_1.setBounds(10, 246, 53, 20);
+		lblCliente_1_1_3_2_1.setBounds(10, 408, 53, 20);
 		getContentPane().add(lblCliente_1_1_3_2_1);
 		
 		txtBairro = new JTextField();
-		txtBairro.setBounds(52, 215, 145, 20);
+		txtBairro.setBounds(59, 377, 145, 20);
 		getContentPane().add(txtBairro);
 		txtBairro.setColumns(10);
 		txtCep.setDocument(new Validador(15));
 		
 		JLabel lblCliente_1_1_3_2_2 = new JLabel("N° :");
-		lblCliente_1_1_3_2_2.setBounds(10, 272, 53, 20);
+		lblCliente_1_1_3_2_2.setBounds(10, 439, 53, 20);
 		getContentPane().add(lblCliente_1_1_3_2_2);
 		
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(35, 272, 145, 20);
+		txtNumero.setBounds(39, 439, 145, 20);
 		getContentPane().add(txtNumero);
 		txtNumero.setDocument(new Validador(5));
 		
 		cboUf = new JComboBox();
 		cboUf.setModel(new DefaultComboBoxModel(new String[] {"", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "TO"}));
-		cboUf.setBounds(35, 246, 68, 22);
+		cboUf.setBounds(39, 407, 68, 22);
 		getContentPane().add(cboUf);
+		
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setOpaque(true);
+		lblNewLabel_2.setBackground(new Color(33, 146, 123));
+		lblNewLabel_2.setBounds(0, 228, 784, 31);
+		getContentPane().add(lblNewLabel_2);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setOpaque(true);
+		lblNewLabel_4.setBackground(new Color(33, 146, 123));
+		lblNewLabel_4.setBounds(0, 0, 784, 31);
+		getContentPane().add(lblNewLabel_4);
+		
+		lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(Clientes.class.getResource("/img/IconBike.png")));
+		lblNewLabel_5.setToolTipText("Xrider");
+		lblNewLabel_5.setBounds(656, 45, 128, 128);
+		getContentPane().add(lblNewLabel_5);
+		
+		lblNewLabel_2_1 = new JLabel("XRaider");
+		lblNewLabel_2_1.setForeground(Color.BLACK);
+		lblNewLabel_2_1.setFont(new Font("Sylfaen", Font.BOLD, 19));
+		lblNewLabel_2_1.setBounds(687, 174, 97, 32);
+		getContentPane().add(lblNewLabel_2_1);
+		
+		lblNewLabel_6 = new JLabel("Email:");
+		lblNewLabel_6.setBounds(10, 144, 46, 14);
+		getContentPane().add(lblNewLabel_6);
+		
+		txtEmail = new JTextField();
+		txtEmail.setBounds(59, 141, 181, 20);
+		getContentPane().add(txtEmail);
+		txtEmail.setColumns(10);
 	
 	}
 	
@@ -298,6 +351,7 @@ public class Clientes extends JDialog {
 		txtIdcli.setText(null);
 		txtCliente.setText(null);
 		txtContato.setText(null);
+		txtEmail.setText(null);		
 		txtCpfeCnpj.setText(null);
 		txtEndereco.setText(null);
 		txtComplemento.setText(null);
@@ -375,14 +429,15 @@ public class Clientes extends JDialog {
 					txtIdcli.setText(rs.getString(1));
 					txtCliente.setText(rs.getString(2));
 					txtContato.setText(rs.getString(3));
-					txtEndereco.setText(rs.getString(4));
-					txtComplemento.setText(rs.getString(5));
-					txtCpfeCnpj.setText(rs.getString(6));
-					txtCidade.setText(rs.getString(7));
-					txtCep.setText(rs.getString(8));
-					txtBairro.setText(rs.getString(9));
-					cboUf.setSelectedItem(rs.getString(10));
-					txtNumero.setText(rs.getString(11));
+					txtEmail.setText(rs.getString(4));
+					txtEndereco.setText(rs.getString(5));
+					txtComplemento.setText(rs.getString(6));
+					txtCpfeCnpj.setText(rs.getString(7));
+					txtCidade.setText(rs.getString(8));
+					txtCep.setText(rs.getString(9));
+					txtBairro.setText(rs.getString(10));
+					cboUf.setSelectedItem(rs.getString(11));
+					txtNumero.setText(rs.getString(12));
 					btnAdicionar.setEnabled(false);
 					btnEditar.setEnabled(true);
 					btnExcluir.setEnabled(true);
@@ -441,6 +496,9 @@ public class Clientes extends JDialog {
 		} else if (txtContato.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o Contato do Cliente");
 			txtContato.requestFocus();
+		}else if (txtEmail.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Email do Cliente");
+			txtEmail.requestFocus();
 		} else if (txtEndereco.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o Endereço do Cliente");
 			txtEndereco.requestFocus();
@@ -460,7 +518,7 @@ public class Clientes extends JDialog {
 		else {
 			
 			//lógica principal
-			String create = "insert into clientes (cliente, contato, endereco, complemento, cpfecnpj, cidade, cep, bairro, uf, numero) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String create = "insert into clientes (cliente, contato, email, endereco, complemento, cpfecnpj, cidade, cep, bairro, uf, numero) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			//tratamento de exceções
 			try {
 				//abrir a conexão
@@ -469,14 +527,15 @@ public class Clientes extends JDialog {
 				pst = con.prepareStatement(create);
 				pst.setString(1,  txtCliente.getText());
 				pst.setString(2,  txtContato.getText());
-				pst.setString(3,  txtEndereco.getText());
-				pst.setString(4,  txtComplemento.getText());
-				pst.setString(5,  txtCpfeCnpj.getText());
-				pst.setString(6,  txtCidade.getText());
-				pst.setString(7,  txtCep.getText());
-				pst.setString(8,  txtBairro.getText());
-				pst.setString(9,  cboUf.getSelectedItem().toString());
-				pst.setString(10,  txtNumero.getText());
+				pst.setString(3,  txtEmail.getText());
+				pst.setString(4,  txtEndereco.getText());
+				pst.setString(5,  txtComplemento.getText());
+				pst.setString(6,  txtCpfeCnpj.getText());
+				pst.setString(7,  txtCidade.getText());
+				pst.setString(8,  txtCep.getText());
+				pst.setString(9,  txtBairro.getText());
+				pst.setString(10,  cboUf.getSelectedItem().toString());
+				pst.setString(11,  txtNumero.getText());
 				//executa a query(Instrução SQL (CRUD - Create)
 				pst.executeUpdate();
 				//confirmar
@@ -504,6 +563,9 @@ public class Clientes extends JDialog {
 		} else if (txtContato.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o Contato do Cliente");
 			txtContato.requestFocus();
+		}else if (txtEmail.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Preencha o Email do Cliente");
+			txtEmail.requestFocus();
 		} else if (txtEndereco.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o Endereço do Cliente");
 			txtEndereco.requestFocus();
@@ -523,7 +585,7 @@ public class Clientes extends JDialog {
 		else {
 			//Lógica principal
 			//CRUD - Update
-			String update = "update clientes set cliente = ?, contato = ?, endereco = ?, complemento = ?, cpfecnpj = ?, cidade = ?, cep = ?, bairro = ?, uf = ?, numero = ? where idcli = ?";
+			String update = "update clientes set cliente = ?, contato = ?, email = ?, endereco = ?, complemento = ?, cpfecnpj = ?, cidade = ?, cep = ?, bairro = ?, uf = ?, numero = ? where idcli = ?";
 			try {
 				//abrir conexão
 				con = dao.conectar();
@@ -531,15 +593,16 @@ public class Clientes extends JDialog {
 				pst = con.prepareStatement(update);
 				pst.setString(1,txtCliente.getText());
 				pst.setString(2,txtContato.getText());
-				pst.setString(3,txtEndereco.getText());
-				pst.setString(4,txtComplemento.getText());
-				pst.setString(5,txtCpfeCnpj.getText());
-				pst.setString(6,txtCidade.getText());
-				pst.setString(7,txtCep.getText());
-				pst.setString(8,txtBairro.getText());
-				pst.setString(9,cboUf.getSelectedItem().toString());
-				pst.setString(10,txtNumero.getText());
-				pst.setString(11,txtIdcli.getText());
+				pst.setString(3,txtEmail.getText());
+				pst.setString(4,txtEndereco.getText());
+				pst.setString(5,txtComplemento.getText());
+				pst.setString(6,txtCpfeCnpj.getText());
+				pst.setString(7,txtCidade.getText());
+				pst.setString(8,txtCep.getText());
+				pst.setString(9,txtBairro.getText());
+				pst.setString(10,cboUf.getSelectedItem().toString());
+				pst.setString(11,txtNumero.getText());
+				pst.setString(12,txtIdcli.getText());
 				//executar a query
 				pst.executeUpdate();
 				//confirmar para o usuário

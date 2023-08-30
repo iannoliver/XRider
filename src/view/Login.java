@@ -61,6 +61,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/IconBike.png")));
 		setTitle("XRider Sistemas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

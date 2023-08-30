@@ -60,6 +60,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setResizable(false);
 		setBackground(new Color(255, 255, 255));
 		setTitle("Sistema - Assistência de Bicicletas");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/IconBike.png")));
