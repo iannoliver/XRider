@@ -30,6 +30,7 @@ import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 public class Relatorios extends JDialog {
 	DAO dao = new DAO();
@@ -67,7 +68,7 @@ public class Relatorios extends JDialog {
 		setTitle("Relatórios");
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(null);
 		
 		JButton btnClientes = new JButton("");
@@ -84,7 +85,7 @@ public class Relatorios extends JDialog {
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(Relatorios.class.getResource("/img/iconbike2.png")));
-		lblNewLabel_1.setBounds(194, 202, 48, 48);
+		lblNewLabel_1.setBounds(378, 513, 48, 48);
 		getContentPane().add(lblNewLabel_1);
 		btnClientes.setBounds(44, 25, 128, 128);
 		getContentPane().add(btnClientes);
@@ -100,14 +101,44 @@ public class Relatorios extends JDialog {
 				relatorioServicos();
 			}
 		});
-		btnServicos.setBounds(252, 25, 128, 128);
+		btnServicos.setBounds(298, 25, 128, 128);
 		getContentPane().add(btnServicos);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setBackground(new Color(73, 156, 148));
-		lblNewLabel.setBounds(0, 191, 434, 70);
+		lblNewLabel.setBounds(0, 491, 784, 70);
 		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("Imprimir Clientes");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(44, 164, 166, 30);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Imprimir Serviços");
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2_1.setBounds(294, 164, 166, 30);
+		getContentPane().add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("Imprimir Serviços");
+		lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2_1_1.setBounds(527, 164, 166, 30);
+		getContentPane().add(lblNewLabel_2_1_1);
+		
+		JLabel lblNewLabel_2_1_2 = new JLabel("Imprimir Serviços");
+		lblNewLabel_2_1_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2_1_2.setBounds(27, 366, 166, 30);
+		getContentPane().add(lblNewLabel_2_1_2);
+		
+		JLabel lblNewLabel_2_1_3 = new JLabel("Imprimir Serviços");
+		lblNewLabel_2_1_3.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2_1_3.setBounds(298, 377, 166, 30);
+		getContentPane().add(lblNewLabel_2_1_3);
+		
+		JLabel lblNewLabel_2_1_4 = new JLabel("Imprimir Serviços");
+		lblNewLabel_2_1_4.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2_1_4.setBounds(527, 377, 166, 30);
+		getContentPane().add(lblNewLabel_2_1_4);
 
 	}
 	

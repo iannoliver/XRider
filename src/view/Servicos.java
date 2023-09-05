@@ -699,6 +699,11 @@ public class Servicos extends JDialog {
 				// se existir a OS
 				if (rs.next()) {					
 					//document.add(new Paragraph("OS: " + rs.getString(1)));
+					
+					Paragraph A = new Paragraph("Ordem de Serviço");
+					A.setAlignment(Element.ALIGN_CENTER);
+					document.add(A);
+					
 					Paragraph os = new Paragraph ("OS: " + rs.getString(1));
 					os.setAlignment(Element.ALIGN_RIGHT);
 					document.add(os);
@@ -756,16 +761,34 @@ public class Servicos extends JDialog {
 					document.add(new Paragraph(" "));
 					document.add(new Paragraph("______________________________________________________________________________"));
 					document.add(new Paragraph(" "));
-					Paragraph I = new Paragraph("Informações do Cliente");
+					Paragraph I = new Paragraph("Informações e Diagnostico");
 					I.setAlignment(Element.ALIGN_CENTER);
 					document.add(I);
 					document.add(new Paragraph(" "));
 					
+					Paragraph D = new Paragraph("Diagnostico");
+					D.setAlignment(Element.ALIGN_CENTER);
+					document.add(D);
+					
+					Paragraph d = new Paragraph ("" + rs.getString(11));
+					d.setAlignment(Element.ALIGN_CENTER);
+					document.add(d);
+					
 					//imprimir imagens
 					Image imagem = Image.getInstance(Servicos.class.getResource("/img/IconBike.png"));
 					imagem.scaleToFit(192,70);
-					imagem.setAbsolutePosition(500, 100);
+					imagem.setAbsolutePosition(500, 670);
 					document.add(imagem);
+					
+					Image im2 = Image.getInstance(Servicos.class.getResource("/img/machrel.png"));
+					im2.scaleToFit(192,70);
+					im2.setAbsolutePosition(100, 550);
+					document.add(im2);
+					
+					Image im3 = Image.getInstance(Servicos.class.getResource("/img/clirel.png"));
+					im3.scaleToFit(192,70);
+					im3.setAbsolutePosition(100, 400);
+					document.add(im3);
 				}
 				// fechar a conexão com o banco
 				con.close();
