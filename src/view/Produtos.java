@@ -59,17 +59,12 @@ import java.awt.Toolkit;
 public class Produtos extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	// Instance objects JDBC
 	DAO dao = new DAO();
 	private Connection con;
 	private PreparedStatement pst;
 	private ResultSet rs;
-	// Instance explorer for loading files
 	JFileChooser jfc = new JFileChooser();
-	// Instance objects inputs
 	private FileInputStream fis;
-
-	// Global variable to storage files input sizes
 	private int tamanho;
 	private boolean IsImageLoaded;
 
@@ -98,12 +93,7 @@ public class Produtos extends JDialog {
 	private JButton btnAlterar;
 	private JButton btnExcluir;
 	private JButton btnPesquisar;
-	// private JDateChooser dateEntrada;
-	// private JDateChooser dateValidade;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -118,20 +108,15 @@ public class Produtos extends JDialog {
 		});
 	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public Produtos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IconBike.png")));
 		getContentPane().addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				scrollPane.setVisible(false);
 				scrollprodutos.setVisible(false);
 			}
 		});
 		addWindowListener(new WindowAdapter() {
-			@Override
 			public void windowActivated(WindowEvent e) {
 				txtBarcode.requestFocus();
 			}
@@ -211,7 +196,6 @@ public class Produtos extends JDialog {
 
 		listFornecedor = new JList();
 		listFornecedor.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				int linha = listFornecedor.getSelectedIndex();
 				String comando = "Select * from fornecedores where razao like '" + txtFornecedor.getText() + "%'"
@@ -233,10 +217,8 @@ public class Produtos extends JDialog {
 						}
 
 					} catch (SQLException SQLe) {
-						// TODO: handle exception
 						SQLe.printStackTrace();
 					} catch (Exception ex) {
-						// TODO: handle exception
 						ex.printStackTrace();
 					}
 
@@ -245,15 +227,10 @@ public class Produtos extends JDialog {
 		});
 		scrollPane.setViewportView(listFornecedor);
 
-		// dateEntrada = new JDateChooser();
-		// dateEntrada.setBounds(379, 226, 147, 20);
-		// getContentPane().add(dateEntrada);
-
 		JLabel lblButton = new JLabel("");
 		lblButton.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				pesquisarBarcode();
 			}
 		});
@@ -263,9 +240,6 @@ public class Produtos extends JDialog {
 
 		txtBarcode = new JTextField();
 		txtBarcode.addKeyListener(new KeyAdapter() {
-			// leitor de c�digo de barras
-			// evento ao pressionar uma tecla espec�fica (ENTER)
-			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					pesquisarBarcode();
@@ -307,7 +281,6 @@ public class Produtos extends JDialog {
 
 		txtFornecedor = new JTextField();
 		txtFornecedor.addKeyListener(new KeyAdapter() {
-			@Override
 			public void keyReleased(KeyEvent e) {
 				pesquisarFornecedor();
 			}
@@ -331,7 +304,6 @@ public class Produtos extends JDialog {
 
 		txtProduto = new JTextField();
 		txtProduto.addKeyListener(new KeyAdapter() {
-			@Override
 			public void keyReleased(KeyEvent e) {
 				digitProdutos();
 			}
@@ -352,19 +324,14 @@ public class Produtos extends JDialog {
 		lblNewLabel_7.setBounds(386, 387, 64, 14);
 		getContentPane().add(lblNewLabel_7);
 
-		// dateValidade = new JDateChooser();
-		// dateValidade.setBounds(577, 226, 147, 20);
-		// getContentPane().add(dateValidade);
-
 		JLabel lblNewLabel_8 = new JLabel("Valor");
 		lblNewLabel_8.setBounds(50, 382, 46, 14);
 		getContentPane().add(lblNewLabel_8);
 
 		txtValor = new JTextField();
 		txtValor.addKeyListener(new KeyAdapter() {
-			@Override
 			public void keyTyped(KeyEvent e) {
-			onlyNum(e);
+				onlyNum(e);
 			}
 		});
 		txtValor.setBounds(89, 379, 103, 20);
@@ -377,9 +344,9 @@ public class Produtos extends JDialog {
 
 		txtLucro = new JTextField();
 		txtLucro.addKeyListener(new KeyAdapter() {
-			@Override
 			public void keyTyped(KeyEvent e) {
-				onlyNum(e);}
+				onlyNum(e);
+			}
 		});
 		txtLucro.setBounds(260, 376, 38, 20);
 		getContentPane().add(txtLucro);
@@ -407,8 +374,8 @@ public class Produtos extends JDialog {
 
 		txtEstoque = new JTextField();
 		txtEstoque.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {onlyNum(e);
+			public void keyTyped(KeyEvent e) {
+				onlyNum(e);
 			}
 		});
 		txtEstoque.setBounds(89, 329, 51, 20);
@@ -447,9 +414,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblNewLabel_4_1);
 
 		txtLote = new JTextField();
-//		txtLote.addKeyListener(new KeyAdapter() {
-//			
-//		});
 		txtLote.setColumns(10);
 		txtLote.setBounds(90, 283, 121, 20);
 		getContentPane().add(txtLote);
@@ -512,8 +476,6 @@ public class Produtos extends JDialog {
 		lblNewLabel.setBounds(0, 492, 784, 69);
 		getContentPane().add(lblNewLabel);
 
-		
-		
 		txtBarcode.setDocument(new Validador(30));
 		txtCodigo.setDocument(new Validador(50));
 		txtProduto.setDocument(new Validador(45));
@@ -526,7 +488,6 @@ public class Produtos extends JDialog {
 //		txtLucro.setDocument(new Validador(3));
 		txtLocal.setDocument(new Validador(50));
 	}// fim do construtor
-
 
 	private void pesquisarFornecedor() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
@@ -560,7 +521,7 @@ public class Produtos extends JDialog {
 		// System.out.println("teste bot�o pesquisar produto");
 		String comando2 = "select * from produtos where idproduto = ?";
 		String comando = "select * from produtos inner join fornecedores";
-	
+
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(comando);
@@ -569,10 +530,10 @@ public class Produtos extends JDialog {
 			if (rs.next()) {
 
 				scrollprodutos.setVisible(false);
-				//validação
+				// validação
 				btnAlterar.setEnabled(true);
 				btnExcluir.setEnabled(true);
-				
+
 				txtCodigo.setText(rs.getString(1));
 				txtProduto.setText(rs.getString(2));
 				txtBarcode.setText(rs.getString(3));
@@ -589,7 +550,7 @@ public class Produtos extends JDialog {
 				txtEstoquemin.setText(rs.getString(10));
 				txtValor.setText(rs.getString(11));
 				cboUnidade.setSelectedItem(rs.getString(12));
-				
+
 				txtLocal.setText(rs.getString(13));
 				txtLote.setText(rs.getString(14));
 				txtLucro.setText(rs.getString(15));
@@ -599,8 +560,7 @@ public class Produtos extends JDialog {
 				BufferedImage imagem = null;
 				try {
 					imagem = ImageIO.read(new ByteArrayInputStream(img));
-				}
-				catch (Exception e1) {
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 
@@ -613,79 +573,16 @@ public class Produtos extends JDialog {
 				JOptionPane.showMessageDialog(null, "Produto n�o cadastrado");
 			}
 			con.close();
-		}catch (SQLException SQLe) {
+		} catch (SQLException SQLe) {
 			// TODO: handle exception
 			SQLe.printStackTrace();
-		}
-		catch (NullPointerException Nulle) {
+		} catch (NullPointerException Nulle) {
 			// TODO: handle exception
 			Nulle.printStackTrace();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-//	private void pesquisarBarcode() {
-//		// System.out.println("teste bot�o pesquisar produto");
-//		String comando = "select * from produtos where barcode = ?";
-//		try {
-//			Connection con = dao.conectar();
-//			PreparedStatement pst = con.prepareStatement(comando);
-//			pst.setString(1, txtCodigo.getText());
-//			ResultSet rs = pst.executeQuery();
-//			if (rs.next()) {
-//				txtCodigo.setText(rs.getString(1));
-//				txtProduto.setText(rs.getString(2));
-//				txtBarcode.setText(rs.getString(3));
-//				txtFabricante.setText(rs.getString(4));
-//				txtDescricao.setText(rs.getString(5));
-//				dataEntrada.setDate(rs.getDate(6));
-//				dataValidade.setDate(rs.getDate(7));
-//
-//				Blob blob = (Blob) rs.getBlob(8);
-//
-//				String setarDataent = rs.getString(6);
-//				Date dataEntradex = new SimpleDateFormat("yyyy-MM-dd").parse(setarDataent);
-//				dataEntrada.setDate(dataEntradex);
-//				txtEstoque.setText(rs.getString(9));
-//				txtEstoquemin.setText(rs.getString(10));
-//
-//				cboUnidade.setSelectedItem(rs.getString(12));
-//				txtValor.setText(rs.getString(14));
-//				txtLucro.setText(rs.getString(15));
-//				txtFornecedor.setText(rs.getString(16));
-//
-//				// txtBarcode.setText(rs.getString(2));
-////				txtProduto.setText(rs.getString(3));
-////				txtaDescricao.setText(rs.getString(4));
-////				//etar a data do JCalendar
-////				String setardataEnt = rs.getString(8);
-////				txtFabricante.setText(rs.getString(5));
-////				txtEstoque.setText(rs.getString(8));
-////				txtEstoquemin.setText(rs.getNString(9));
-////				cboUnidade.setSelectedItem(rs.getString(10));
-////				txtLocal.setText(rs.getString(11));
-////				txtId.setText(rs.getString(14));
-////				//formata��o da data recebida pelo MySQL
-////				// JCalendar - formata��o para exibi��o
-////				String setarData = rs.getString(6);
-////				//apoio a l�gica
-////				//System.out.println(setarData);
-////				Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
-////				//dateEntrada.setDate(dataFormatada);
-////				String setarData2 = rs.getString(7);
-////				Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
-////				//dateValidade.setDate(dataFormatada2);
-////				txtCusto.setText(rs.getString(12));
-////				txtLucro.setText(rs.getString(13));
-//			} else {
-//				JOptionPane.showMessageDialog(null, "Produto não cadastrado");
-//			}
-//			con.close();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
 
 	private void pesquisarProdutoBarcode() {
 		// System.out.println("teste bot�o pesquisar produto");
@@ -705,16 +602,10 @@ public class Produtos extends JDialog {
 				cboUnidade.setSelectedItem(rs.getString(10));
 				txtLocal.setText(rs.getString(11));
 				txtId.setText(rs.getString(14));
-				// formata��o da data recebida pelo MySQL
-				// JCalendar - formata��o para exibi��o
 				String setarData = rs.getString(6);
-				// apoio a l�gica
-				// System.out.println(setarData);
 				Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
-				// dateEntrada.setDate(dataFormatada);
 				String setarData2 = rs.getString(7);
 				Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
-				// dateValidade.setDate(dataFormatada2);
 				txtValor.setText(rs.getString(12));
 				txtLucro.setText(rs.getString(13));
 			} else {
@@ -730,8 +621,6 @@ public class Produtos extends JDialog {
 
 		if (txtBarcode.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencher o barcode");
-//		} else if (txtCodigo.getText().isEmpty()) {
-//			JOptionPane.showMessageDialog(null, "Preencher o codigo");
 		} else if (txtProduto.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencher o Produto");
 		} else if (txtDescricao.getText().isEmpty()) {
@@ -758,19 +647,9 @@ public class Produtos extends JDialog {
 		} else if (txtId.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencher o fornecedor");
 			System.out.println("Date empty");
-//		else if (lblimg.getIcon().equals("/bin/img/produtosIcon.png")) {JOptionPane.showMessageDialog(null, "Carregar imagem");
 		} else {
-
-			/**
-			 * Comando insert para criacao de dados no produtos Dida = didatico, versao do
-			 * professor O banco de dados produtos tambem e diferente Total de 12
-			 * colunas
-			 */
 			String comando = "insert into produtos (barcode,produto,descricao,fabricante,datavalidade,foto,estoque,estoquemin,unidademedida,localarmazenagem,valor,lote,lucro,idFornecedor) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			try {
-
-//			Connection con = dao.conectar();
-//			PreparedStatement pst = con.prepareStatement(comando);
 				con = dao.conectar();
 				pst = con.prepareStatement(comando);
 
@@ -778,12 +657,7 @@ public class Produtos extends JDialog {
 				pst.setString(2, txtProduto.getText());
 				pst.setString(3, txtDescricao.getText());
 				pst.setString(4, txtFabricante.getText());
-				// Formatacao do valor do JCalendar para a insercao correta no banco
 				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
-				/**
-				 * Teoricamente a data formada e levada ao setString 5, que e a coluna da data
-				 * privada.
-				 */
 				String dataformada = formatador.format(dataValidade.getDate());
 				pst.setString(5, dataformada);
 				pst.setBlob(6, fis, tamanho);
@@ -811,52 +685,28 @@ public class Produtos extends JDialog {
 				e.printStackTrace();
 			}
 		}
-	}//
-//	private void editar() {
-//		//Validacao dos campos
-//		
-//		
-//		//Comando SQL
-//		String comando = "update * from produtos set=?";
-//		//Preparacao da conexao com o banco de dados
-//		con = dao.conectar();
-//		pst = con.prepareStatement(comando);
-//	}
+	}
 
 	private void loadImage() {
-
-		/**
-		 * This method opens an internal File explorer from java (JFileChooser)
-		 * 
-		 */
 		jfc.setDialogTitle("Selecione o arquivo de imagem");
 		jfc.setFileFilter(new FileNameExtensionFilter("Arquivo de imagens(*.PNG,*.JPG,*.JPEG)", "png", "jpg", "jpeg"));
-
-//		System.out.println(jfc.getFileFilter());
-
-		// File explorer execution and stores File explorer selected file to result
 		int result = jfc.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			try {
 				IsImageLoaded = true;
-				// Catches the file
 				fis = new FileInputStream(jfc.getSelectedFile());
-				// Storages file size by length, converts long to int
 				tamanho = (int) jfc.getSelectedFile().length();
 
-				// na via das duvidas, trocar para java.awt
 				java.awt.Image image = ImageIO.read(jfc.getSelectedFile()).getScaledInstance(lblimg.getWidth(),
 						lblimg.getHeight(), java.awt.Image.SCALE_SMOOTH);
 
-				// set Jlabel
 				lblimg.setIcon(new ImageIcon(image));
 				lblimg.updateUI();
 			} catch (Exception e) {
-				// TODO: handle exception
 			}
-			// lblimg
+
 		}
-	}//
+	}
 
 	private void editar() {
 
@@ -887,7 +737,6 @@ public class Produtos extends JDialog {
 		} else if (dataValidade.getDate() == null) {
 			JOptionPane.showMessageDialog(null, "Preencher a data de validade");
 			System.out.println("Date empty");
-//		else if (lblimg.getIcon().equals("/bin/img/produtosIcon.png")) {JOptionPane.showMessageDialog(null, "Carregar imagem");
 		} else {
 
 			try {
@@ -950,11 +799,9 @@ public class Produtos extends JDialog {
 				limparCampos();
 
 			} catch (SQLException SQLe) {
-				// TODO: handle exception
 				SQLe.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Falha no banco de dados");
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Falha geral");
 			}
@@ -978,13 +825,10 @@ public class Produtos extends JDialog {
 				JOptionPane.showInternalMessageDialog(null, "Removido com sucesso");
 				limparCampos();
 
-//			limparCampos();
 			} catch (java.sql.SQLIntegrityConstraintViolationException se) {
-				//
 				JOptionPane.showInternalMessageDialog(null, "Não pode excluir o cliente (Tem registro OS)");
 				System.out.println(se);
 			} catch (Exception e) {
-				//
 				System.out.println(e);
 			}
 		}
@@ -1008,20 +852,15 @@ public class Produtos extends JDialog {
 		IsImageLoaded = false;
 		dataEntrada.setDate(null);
 		dataValidade.setDate(null);
-		
-		// Validação
 		btnAdicionar.setEnabled(true);
 		btnAlterar.setEnabled(false);
 		btnExcluir.setEnabled(false);
-		
+
 		txtFornecedor.setText(null);
-//		dataEntrada.setText(null);
-//		dataValidade.setText(null);
 	}
+
 	private void listarProdutos() {
-		//validação
-		
-		
+
 		int linha = listProdutos.getSelectedIndex();
 		String comando = "Select * from produtos where produto like '" + txtProduto.getText() + "%'"
 				+ " order by produto limit " + (linha) + ", 1";
@@ -1032,13 +871,10 @@ public class Produtos extends JDialog {
 				rs = pst.executeQuery();
 
 				if (rs.next()) {
+
 					scrollprodutos.setVisible(false);
-					
-					//validação
 					btnAlterar.setEnabled(true);
 					btnExcluir.setEnabled(true);
-					
-					
 					txtCodigo.setText(rs.getString(1));
 					txtProduto.setText(rs.getString(2));
 					txtBarcode.setText(rs.getString(3));
@@ -1062,7 +898,7 @@ public class Produtos extends JDialog {
 					byte[] img = blob.getBytes(1, (int) blob.length());
 					BufferedImage imagem = null;
 					try {
-						
+
 						imagem = ImageIO.read(new ByteArrayInputStream(img));
 					} catch (Exception e1) {
 						System.out.println(e1);
@@ -1101,8 +937,6 @@ public class Produtos extends JDialog {
 				modelo.addElement(rs.getString(2));
 				if (txtProduto.getText().isEmpty()) {
 					System.out.println("Condição");
-//					txt.setVisible(false);
-
 					scrollprodutos.setVisible(false);
 				}
 			}
@@ -1114,11 +948,10 @@ public class Produtos extends JDialog {
 		}
 
 	}//
+
 	private void pesquisarBarcode() {
-		// System.out.println("teste bot�o pesquisar produto");
 		String comando = "select * from produtos where barcode = ?";
-		//validação
-		
+
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(comando);
@@ -1128,24 +961,17 @@ public class Produtos extends JDialog {
 				btnAlterar.setEnabled(true);
 				btnExcluir.setEnabled(true);
 				scrollprodutos.setVisible(false);
-
 				txtCodigo.setText(rs.getString(1));
 				txtProduto.setText(rs.getString(2));
-//				txtBarcode.setText(rs.getString(3));
 				txtFabricante.setText(rs.getString(4));
 				txtDescricao.setText(rs.getString(5));
 				dataEntrada.setDate(rs.getDate(6));
-				// via das duvidas
-//				String setarDataent = rs.getString(6);
-//				Date dataEntradex = new SimpleDateFormat("yyyy-MM-dd").parse(setarDataent);
-//				dataEntrada.setDate(dataEntradex);
 				dataValidade.setDate(rs.getDate(7));
 				Blob blob = (Blob) rs.getBlob(8);
 				txtEstoque.setText(rs.getString(9));
 				txtEstoquemin.setText(rs.getString(10));
 				txtValor.setText(rs.getString(11));
 				cboUnidade.setSelectedItem(rs.getString(12));
-				
 				txtLocal.setText(rs.getString(13));
 				txtLote.setText(rs.getString(14));
 				txtLucro.setText(rs.getString(15));
@@ -1154,8 +980,7 @@ public class Produtos extends JDialog {
 				BufferedImage imagem = null;
 				try {
 					imagem = ImageIO.read(new ByteArrayInputStream(img));
-				}
-				catch (Exception e1) {
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 
@@ -1168,21 +993,19 @@ public class Produtos extends JDialog {
 				JOptionPane.showMessageDialog(null, "Produto não cadastrado");
 			}
 			con.close();
-		}catch (SQLException SQLe) {
-			// TODO: handle exception
+		} catch (SQLException SQLe) {
 			SQLe.printStackTrace();
-		}
-		catch (NullPointerException Nulle) {
-			// TODO: handle exception
+		} catch (NullPointerException Nulle) {
 			Nulle.printStackTrace();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void onlyNum(KeyEvent e) {
 		String caracteres = "0123456789.";
 		if (!caracteres.contains(e.getKeyChar() + "")) {
 			e.consume();
 		}
 	}
-}// fim do codigo
+}

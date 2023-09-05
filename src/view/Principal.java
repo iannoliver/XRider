@@ -276,13 +276,9 @@ public class Principal extends JFrame {
 			System.out.println(e);
 		}
 }
-	/**
-	 * Método responsável por setar a data do rodapé
-	 */
 	private void setarData() {
 		Date date = new Date();
 		DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
-		//alterar o texto da label
 		lblData.setText(formatador.format(date));
 	}
 	}

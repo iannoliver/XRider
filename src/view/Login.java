@@ -110,10 +110,9 @@ public class Login extends JFrame {
 		lblRodape.setBackground(new Color(9, 162, 147));
 		lblRodape.setBounds(0, 169, 395, 48);
 		contentPane.add(lblRodape);
-	}//construtor
+	}
 	
 	private void logar() {
-		//variável para capturar a senha
 		String capturaSenha = new String(txtSenha.getPassword());
 		
 		if(txtLogin.getText().isEmpty()) {
@@ -131,33 +130,21 @@ public class Login extends JFrame {
 				pst.setString(2, capturaSenha);
 				rs = pst.executeQuery();
 				if (rs.next()) {
-					//capturar o perfil do usuario
-					//System.out.println(rs.getString(5));
-					//tratamento do perfil do usuário
 					String perfil = rs.getString(5);
 					if(perfil.equals("admin")) {
-						//logar -- acessar a tela principal
 						principal.setVisible(true);
-						//setar a label da tela principal com o nome do usuario
 						principal.lblUsu.setText(rs.getString(2));
-						//habilitar os botões
 						principal.btnRelatorio.setEnabled(true);
 						principal.btnUsuarios.setEnabled(true);
-						//mudar a cor do Rodapé
 						principal.panelRodapé.setBackground(Color.RED);
 						principal.lblUsu.setBackground(Color.WHITE);
 						principal.lblData.setBackground(Color.WHITE);
-						//fechar a tela de login
 						this.dispose();
 					} else {
-						//logar -- acessar a tela principal
 						principal.setVisible(true);
-						//setar a label da tela principal com o nome do usuario
 						principal.lblUsu.setText(rs.getString(2));
-						//fechar a tela de login
 						this.dispose();
 					}
-					//fechar a tela de login
 					this.dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "O usuario e/ou senha inválidos");
@@ -173,7 +160,6 @@ public class Login extends JFrame {
 	
 	private void status () {
 		try {
-			//Abrir a conexão
 			con = dao.conectar();
 			if (con == null) {
 				lblStatus.setIcon(new ImageIcon(Login.class.getResource("/img/Databaseoff.png")));
@@ -182,10 +168,9 @@ public class Login extends JFrame {
 
 				lblStatus.setIcon(new ImageIcon(Login.class.getResource("/img/Databaseon.png")));
 			}
-			//Nunca esquecer de fechar a conexão
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}//fim do método status da conexão
+	}
 	
-}//código
+}
