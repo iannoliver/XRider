@@ -80,14 +80,17 @@ public class Produtos extends JDialog {
 	private JTextField txtEstoquemin;
 	private JTextField txtLocal;
 	private JTextArea txtDescricao;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cboUnidade;
 	private JTextField txtLote;
 	private JDateChooser dataEntrada;
 	private JButton btnAdicionar;
 	private JDateChooser dataValidade;
 	private JLabel lblimg;
+	@SuppressWarnings("rawtypes")
 	private JList listFornecedor;
 	private JScrollPane scrollPane;
+	@SuppressWarnings("rawtypes")
 	private JList listProdutos;
 	private JScrollPane scrollprodutos;
 	private JButton btnAlterar;
@@ -108,6 +111,7 @@ public class Produtos extends JDialog {
 		});
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Produtos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IconBike.png")));
 		getContentPane().addMouseListener(new MouseAdapter() {
@@ -452,7 +456,6 @@ public class Produtos extends JDialog {
 
 		listProdutos = new JList();
 		listProdutos.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				listarProdutos();
 			}
@@ -463,7 +466,6 @@ public class Produtos extends JDialog {
 		txtDescricao.setBounds(91, 195, 357, 77);
 		getContentPane().add(txtDescricao);
 		txtDescricao.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				listarProdutos();
 			}
@@ -482,13 +484,10 @@ public class Produtos extends JDialog {
 		txtDescricao.setDocument(new Validador(200));
 		txtLote.setDocument(new Validador(45));
 		txtFabricante.setDocument(new Validador(45));
-//		txtEstoque.setDocument(new Validador(3));
-//		txtEstoquemin.setDocument(new Validador(3));
-//		txtValor.setDocument(new Validador(3));
-//		txtLucro.setDocument(new Validador(3));
 		txtLocal.setDocument(new Validador(50));
-	}// fim do construtor
+	}
 
+	@SuppressWarnings("unchecked")
 	private void pesquisarFornecedor() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listFornecedor.setModel(modelo);
@@ -509,28 +508,24 @@ public class Produtos extends JDialog {
 			}
 			con.close();
 		} catch (SQLException SQLe) {
-			// TODO: handle exception=[
 			SQLe.printStackTrace();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
 	private void pesquisarProduto() {
-		// System.out.println("teste bot�o pesquisar produto");
+		@SuppressWarnings("unused")
 		String comando2 = "select * from produtos where idproduto = ?";
 		String comando = "select * from produtos inner join fornecedores";
 
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(comando);
-//			pst.setString(1, txtCodigo.getText());
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 
 				scrollprodutos.setVisible(false);
-				// validação
 				btnAlterar.setEnabled(true);
 				btnExcluir.setEnabled(true);
 
@@ -540,10 +535,6 @@ public class Produtos extends JDialog {
 				txtFabricante.setText(rs.getString(4));
 				txtDescricao.setText(rs.getString(5));
 				dataEntrada.setDate(rs.getDate(6));
-				// via das duvidas
-//				String setarDataent = rs.getString(6);
-//				Date dataEntradex = new SimpleDateFormat("yyyy-MM-dd").parse(setarDataent);
-//				dataEntrada.setDate(dataEntradex);
 				dataValidade.setDate(rs.getDate(7));
 				Blob blob = (Blob) rs.getBlob(8);
 				txtEstoque.setText(rs.getString(9));
@@ -574,18 +565,16 @@ public class Produtos extends JDialog {
 			}
 			con.close();
 		} catch (SQLException SQLe) {
-			// TODO: handle exception
 			SQLe.printStackTrace();
 		} catch (NullPointerException Nulle) {
-			// TODO: handle exception
 			Nulle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void pesquisarProdutoBarcode() {
-		// System.out.println("teste bot�o pesquisar produto");
 		String read = "select * from produtos where barcode = ?";
 		try {
 			Connection con = dao.conectar();
@@ -617,7 +606,6 @@ public class Produtos extends JDialog {
 	}
 
 	private void inserirProduto() {
-		// Fazer validacao
 
 		if (txtBarcode.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencher o barcode");
@@ -770,7 +758,6 @@ public class Produtos extends JDialog {
 					pst.setString(11, txtLocal.getText());
 					pst.setString(12, txtLote.getText());
 					pst.setString(13, txtLucro.getText());
-					// id
 					pst.setString(14, txtCodigo.getText());
 				} else {
 					pst = con.prepareStatement(comandoWithoutImg);
@@ -789,7 +776,6 @@ public class Produtos extends JDialog {
 					pst.setString(10, txtLocal.getText());
 					pst.setString(11, txtLote.getText());
 					pst.setString(12, txtLucro.getText());
-					// id
 					pst.setString(13, txtCodigo.getText());
 				}
 				pst.executeUpdate();
@@ -919,6 +905,7 @@ public class Produtos extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void digitProdutos() {
 
 		DefaultListModel<String> modelo = new DefaultListModel<>();
@@ -947,7 +934,7 @@ public class Produtos extends JDialog {
 			System.out.println(e);
 		}
 
-	}//
+	}
 
 	private void pesquisarBarcode() {
 		String comando = "select * from produtos where barcode = ?";

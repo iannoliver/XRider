@@ -263,6 +263,7 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 
 		JButton btnBuscaCep = new JButton("");
+		btnBuscaCep.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBuscaCep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscaCep();

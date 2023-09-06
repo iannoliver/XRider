@@ -42,6 +42,7 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import java.awt.Cursor;
 
 public class Servicos extends JDialog {
 	DAO dao = new DAO();
@@ -184,6 +185,7 @@ public class Servicos extends JDialog {
 		getRootPane().setDefaultButton(btnBuscar);
 
 		btnAdicionar = new JButton("");
+		btnAdicionar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAdicionar.setContentAreaFilled(false);
 		btnAdicionar.setBorder(null);
 		btnAdicionar.setIcon(new ImageIcon(Servicos.class.getResource("/img/Add.png")));
@@ -197,6 +199,7 @@ public class Servicos extends JDialog {
 		getContentPane().add(btnAdicionar);
 
 		btnEditar = new JButton("");
+		btnEditar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEditar.setIcon(new ImageIcon(Servicos.class.getResource("/img/EditarCli.png")));
 		btnEditar.setToolTipText("Editar");
 		btnEditar.setBorder(null);
@@ -211,6 +214,7 @@ public class Servicos extends JDialog {
 		getContentPane().add(btnEditar);
 
 		btnExcluir = new JButton("");
+		btnExcluir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnExcluir.setIcon(new ImageIcon(Servicos.class.getResource("/img/Lixeira2.png")));
 		btnExcluir.setContentAreaFilled(false);
 		btnExcluir.setBorder(null);
@@ -225,6 +229,7 @@ public class Servicos extends JDialog {
 		getContentPane().add(btnExcluir);
 
 		btnLimpar = new JButton("");
+		btnLimpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLimpar.setBorder(null);
 		btnLimpar.setContentAreaFilled(false);
 		btnLimpar.setToolTipText("Limpar");
@@ -388,6 +393,7 @@ public class Servicos extends JDialog {
 		txtOBSE.setText(null);
 		txtDefeito.setText(null);
 		txtValor.setText(null);
+		txtDiagnostico.setText(null);
 		txtCliente.setText(null);
 		btnAdicionar.setEnabled(false);
 		btnEditar.setEnabled(false);

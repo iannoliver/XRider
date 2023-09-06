@@ -39,6 +39,7 @@ public class Relatorios extends JDialog {
 	private ResultSet rs;
 
 	private static final long serialVersionUID = 1L;
+	private JButton btnServicos_1;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,7 +79,7 @@ public class Relatorios extends JDialog {
 		lblNewLabel_1.setIcon(new ImageIcon(Relatorios.class.getResource("/img/iconbike2.png")));
 		lblNewLabel_1.setBounds(378, 513, 48, 48);
 		getContentPane().add(lblNewLabel_1);
-		btnClientes.setBounds(44, 25, 128, 128);
+		btnClientes.setBounds(115, 77, 128, 128);
 		getContentPane().add(btnClientes);
 
 		JButton btnServicos = new JButton("");
@@ -92,7 +93,7 @@ public class Relatorios extends JDialog {
 				relatorioServicos();
 			}
 		});
-		btnServicos.setBounds(298, 25, 128, 128);
+		btnServicos.setBounds(544, 77, 128, 128);
 		getContentPane().add(btnServicos);
 
 		JLabel lblNewLabel = new JLabel("");
@@ -101,54 +102,34 @@ public class Relatorios extends JDialog {
 		lblNewLabel.setBounds(0, 491, 784, 70);
 		getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_2 = new JLabel("Imprimir Clientes");
+		JLabel lblNewLabel_2 = new JLabel("Clientes");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2.setBounds(44, 164, 166, 30);
+		lblNewLabel_2.setBounds(149, 234, 91, 30);
 		getContentPane().add(lblNewLabel_2);
 
-		JLabel lblNewLabel_2_1 = new JLabel("Imprimir Serviços");
+		JLabel lblNewLabel_2_1 = new JLabel("Serviços");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1.setBounds(294, 164, 166, 30);
+		lblNewLabel_2_1.setBounds(576, 234, 91, 30);
 		getContentPane().add(lblNewLabel_2_1);
 
-		JLabel lblNewLabel_2_1_1 = new JLabel("Imprimir Estoque");
+		JLabel lblNewLabel_2_1_1 = new JLabel("Patrimônio");
 		lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1_1.setBounds(527, 155, 166, 48);
+		lblNewLabel_2_1_1.setBounds(344, 370, 118, 48);
 		getContentPane().add(lblNewLabel_2_1_1);
-
-		JLabel lblNewLabel_2_1_2 = new JLabel("Imprimir Patrimônio");
-		lblNewLabel_2_1_2.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1_2.setBounds(124, 403, 187, 30);
-		getContentPane().add(lblNewLabel_2_1_2);
-
-		JLabel lblNewLabel_2_1_3 = new JLabel("Imprimir Validade");
-		lblNewLabel_2_1_3.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1_3.setBounds(437, 403, 166, 30);
-		getContentPane().add(lblNewLabel_2_1_3);
 		
-		JButton btnServicos_1 = new JButton("");
+		btnServicos_1 = new JButton("");
+		btnServicos_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnServicos_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				relatorioPatrimonio();
+			}
+		});
 		btnServicos_1.setIcon(new ImageIcon(Relatorios.class.getResource("/img/Estoque.png")));
 		btnServicos_1.setToolTipText("Serviços");
 		btnServicos_1.setContentAreaFilled(false);
 		btnServicos_1.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnServicos_1.setBounds(540, 25, 128, 128);
+		btnServicos_1.setBounds(329, 234, 128, 128);
 		getContentPane().add(btnServicos_1);
-		
-		JButton btnServicos_2 = new JButton("");
-		btnServicos_2.setIcon(new ImageIcon(Relatorios.class.getResource("/img/validade.png")));
-		btnServicos_2.setToolTipText("Serviços");
-		btnServicos_2.setContentAreaFilled(false);
-		btnServicos_2.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnServicos_2.setBounds(455, 264, 128, 128);
-		getContentPane().add(btnServicos_2);
-		
-		JButton btnServicos_3 = new JButton("");
-		btnServicos_3.setIcon(new ImageIcon(Relatorios.class.getResource("/img/Patrimonio.png")));
-		btnServicos_3.setToolTipText("Serviços");
-		btnServicos_3.setContentAreaFilled(false);
-		btnServicos_3.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnServicos_3.setBounds(147, 264, 128, 128);
-		getContentPane().add(btnServicos_3);
 
 	}
 
@@ -204,7 +185,7 @@ public class Relatorios extends JDialog {
 			document.add(new Paragraph(formatador.format(dataRelatorio)));
 			document.add(new Paragraph("Serviços:"));
 			document.add(new Paragraph(" "));
-			String readServicos = "select os,dataOS,marca, modelo, tipo, cor, numeroserie, observacoesespeciais,defeito,valor,cliente from servicos inner join clientes on servicos.idcli = clientes.idcli;";
+			String readServicos = "select os, dataOS, marca, modelo, cor, cliente from servicos inner join clientes on servicos.idcli = clientes.idcli;";
 			try {
 				con = dao.conectar();
 				pst = con.prepareStatement(readServicos);
@@ -212,9 +193,9 @@ public class Relatorios extends JDialog {
 				PdfPTable tabela = new PdfPTable(6);
 				PdfPCell col1 = new PdfPCell(new Paragraph("OS"));
 				PdfPCell col2 = new PdfPCell(new Paragraph("Data"));
-				PdfPCell col3 = new PdfPCell(new Paragraph("Bike"));
-				PdfPCell col4 = new PdfPCell(new Paragraph("Defeito"));
-				PdfPCell col5 = new PdfPCell(new Paragraph("Valor"));
+				PdfPCell col3 = new PdfPCell(new Paragraph("Marca"));
+				PdfPCell col4 = new PdfPCell(new Paragraph("Modelo"));
+				PdfPCell col5 = new PdfPCell(new Paragraph("Cor"));
 				PdfPCell col6 = new PdfPCell(new Paragraph("Cliente"));
 				tabela.addCell(col1);
 				tabela.addCell(col2);
@@ -248,8 +229,10 @@ public class Relatorios extends JDialog {
 		}
 	}
 	
-	private void relatorioEstoque() {
+	private void relatorioPatrimonio() {
+
 		Document document = new Document();
+
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream("estoque.pdf"));
 			document.open();
@@ -258,28 +241,74 @@ public class Relatorios extends JDialog {
 			document.add(new Paragraph(formatador.format(dataRelatorio)));
 			document.add(new Paragraph("Estoque:"));
 			document.add(new Paragraph(" "));
-			String readProdutos = "select produto, estoque, estoquemin, localarmazenagem, lote from produtos order by produto";
+			String readClientes = "select idproduto as idproduto, produto, date_format(datavalidade, '%d/%m/%Y') as validade, estoque, estoquemin as estóque_mínimo from produtos where estoque < estoquemin";
 			try {
 				con = dao.conectar();
-				pst = con.prepareStatement(readProdutos);
+				pst = con.prepareStatement(readClientes);
 				rs = pst.executeQuery();
-				PdfPTable tabela = new PdfPTable(4);
-				PdfPCell col1 = new PdfPCell(new Paragraph("Produto"));
-				PdfPCell col2 = new PdfPCell(new Paragraph("Estoque"));
-				PdfPCell col3 = new PdfPCell(new Paragraph("EstoqueMinimo"));
-				PdfPCell col4 = new PdfPCell(new Paragraph("Armazenagem"));
+				PdfPTable tabela = new PdfPTable(5);
+				PdfPCell col1 = new PdfPCell(new Paragraph("código: "));
+				PdfPCell col2 = new PdfPCell(new Paragraph("produto: "));
+				PdfPCell col3 = new PdfPCell(new Paragraph("validade: "));
+				PdfPCell col4 = new PdfPCell(new Paragraph("estoque: "));
+				PdfPCell col5 = new PdfPCell(new Paragraph("estoque mínimo: "));
 				tabela.addCell(col1);
 				tabela.addCell(col2);
 				tabela.addCell(col3);
 				tabela.addCell(col4);
+				tabela.addCell(col5);
 				while (rs.next()) {
-					// popular a tabela
 					tabela.addCell(rs.getString(1));
 					tabela.addCell(rs.getString(2));
 					tabela.addCell(rs.getString(3));
 					tabela.addCell(rs.getString(4));
+					tabela.addCell(rs.getString(5));
 				}
 				document.add(tabela);
+				document.add(new Paragraph("Validade:"));
+				document.add(new Paragraph(" "));
+				String read = "select idproduto as idproduto, produto, date_format(datavalidade, '%d/%m/%Y') as validade from produtos where datavalidade < dataentrada;";
+				pst = con.prepareStatement(read);
+				rs = pst.executeQuery();
+				PdfPTable tabela2 = new PdfPTable(3);
+				PdfPCell col6 = new PdfPCell(new Paragraph("código: "));
+				PdfPCell col7 = new PdfPCell(new Paragraph("produto: "));
+				PdfPCell col8 = new PdfPCell(new Paragraph("validade: "));
+				tabela2.addCell(col6);
+				tabela2.addCell(col7);
+				tabela2.addCell(col8);
+				while (rs.next()) {
+					tabela2.addCell(rs.getString(1));
+					tabela2.addCell(rs.getString(2));
+					tabela2.addCell(rs.getString(3));
+				}
+				document.add(tabela2);
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Patrimônio (Custo):"));
+				document.add(new Paragraph(" "));
+				String read2 = "select sum(valor * estoque) as Total from produtos";
+				pst = con.prepareStatement(read2);
+				rs = pst.executeQuery();
+				PdfPTable tabela3 = new PdfPTable(1);
+				PdfPCell col12 = new PdfPCell(new Paragraph("Patrimônio custo: "));
+				tabela3.addCell(col12);
+				while (rs.next()) {
+					tabela3.addCell(rs.getString(1));
+				}
+				document.add(tabela3);
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph("Patrimônio (venda):"));
+				document.add(new Paragraph(" "));
+				String readVenda = "select sum((valor + (valor * lucro)/100) * estoque) as total from produtos";
+				pst = con.prepareStatement(readVenda);
+				rs = pst.executeQuery();
+				PdfPTable tabela4 = new PdfPTable(1);
+				PdfPCell col43 = new PdfPCell(new Paragraph("Patrimônio venda: "));
+				tabela4.addCell(col43);
+				while (rs.next()) {
+					tabela4.addCell(rs.getString(1));
+				}
+				document.add(tabela4);
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);

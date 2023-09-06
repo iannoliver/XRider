@@ -236,7 +236,7 @@ public class Principal extends JFrame {
 				fornecedores.setVisible(true);
 			}
 		});
-		btnUsuarios_2.setIcon(new ImageIcon(Principal.class.getResource("/img/BMW.png")));
+		btnUsuarios_2.setIcon(new ImageIcon(Principal.class.getResource("/img/Fornecedores.png")));
 		btnUsuarios_2.setToolTipText("Fornecedores");
 		btnUsuarios_2.setForeground(Color.WHITE);
 		btnUsuarios_2.setBorder(null);

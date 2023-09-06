@@ -20,7 +20,10 @@ public class Sobre extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JLabel lblXrider;
+	private JLabel lblIann;
 	private JLabel lblGit;
+	private JLabel lblLinkedin;
 
 	/**
 	 * Launch the application.
@@ -44,7 +47,7 @@ public class Sobre extends JDialog {
 	 */
 	public Sobre() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/IconBike.png")));
-		setBounds(new Rectangle(0, 0, 665, 301));
+		setBounds(new Rectangle(0, 0, 659, 301));
 		getContentPane().setBackground(new Color(255, 255, 255));
 		getContentPane().setLayout(null);
 		
@@ -73,39 +76,52 @@ public class Sobre extends JDialog {
 		lblNewLabel_8.setBounds(10, 11, 625, 64);
 		getContentPane().add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setIcon(new ImageIcon(Sobre.class.getResource("/img/Giticon.png")));
-		lblNewLabel_10.setToolTipText("github");
-		lblNewLabel_10.setBounds(0, 194, 64, 64);
-		getContentPane().add(lblNewLabel_10);
-		
-		JLabel lblNewLabel_11 = new JLabel("");
-		lblNewLabel_11.setIcon(new ImageIcon(Sobre.class.getResource("/img/linkedin.png")));
-		lblNewLabel_11.setToolTipText("Linkedin");
-		lblNewLabel_11.setBounds(376, 197, 64, 64);
-		getContentPane().add(lblNewLabel_11);
-		
-		lblGit = new JLabel("https://github.com/iannoliver/XRider");
-		lblGit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGit = new JLabel("");
 		lblGit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				link("https://github.com/iannoliver/XRider");
 			}
 		});
-		lblGit.setFont(new Font("Sylfaen", Font.BOLD, 16));
-		lblGit.setBounds(68, 208, 281, 38);
+		lblGit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblGit.setIcon(new ImageIcon(Sobre.class.getResource("/img/Giticon.png")));
+		lblGit.setToolTipText("github");
+		lblGit.setBounds(0, 194, 64, 64);
 		getContentPane().add(lblGit);
 		
-		JLabel lblNewLabel_13 = new JLabel("Iann Oliveira");
-		lblNewLabel_13.setFont(new Font("Sylfaen", Font.BOLD, 16));
-		lblNewLabel_13.setBounds(452, 215, 128, 24);
-		getContentPane().add(lblNewLabel_13);
+		lblLinkedin = new JLabel("");
+		lblLinkedin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				link("https://www.linkedin.com/in/iann-oliveira-3106b11a4/");
+			}
+		});
+		lblLinkedin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblLinkedin.setIcon(new ImageIcon(Sobre.class.getResource("/img/linkedin.png")));
+		lblLinkedin.setToolTipText("Linkedin");
+		lblLinkedin.setBounds(346, 194, 64, 64);
+		getContentPane().add(lblLinkedin);
+		
+		lblXrider = new JLabel("XRider");
+		lblXrider.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblXrider.addMouseListener(new MouseAdapter() {
+		});
+		lblXrider.setFont(new Font("Sylfaen", Font.BOLD, 16));
+		lblXrider.setBounds(68, 208, 103, 38);
+		getContentPane().add(lblXrider);
+		
+		lblIann = new JLabel("Iann Oliveira");
+		lblIann.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblIann.addMouseListener(new MouseAdapter() {
+		});
+		lblIann.setFont(new Font("Sylfaen", Font.BOLD, 16));
+		lblIann.setBounds(420, 215, 133, 24);
+		getContentPane().add(lblIann);
 		
 		JLabel lblNewLabel_9 = new JLabel("");
 		lblNewLabel_9.setOpaque(true);
 		lblNewLabel_9.setBackground(new Color(12, 161, 143));
-		lblNewLabel_9.setBounds(0, 183, 649, 78);
+		lblNewLabel_9.setBounds(0, 183, 643, 78);
 		getContentPane().add(lblNewLabel_9);
 	}
 	
