@@ -22,18 +22,14 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
 public class Login extends JFrame {
-	//objetos jdbc
 	DAO dao = new DAO();
 	private Connection con;
 	private PreparedStatement pst;
 	private ResultSet rs;
-	//obj -- tela principal
 	Principal principal = new Principal();
 	
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtLogin;
@@ -41,9 +37,7 @@ public class Login extends JFrame {
 	private JLabel lblRodape;
 	private JLabel lblStatus;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,9 +51,7 @@ public class Login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Login() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/img/IconBike.png")));
@@ -158,6 +150,7 @@ public class Login extends JFrame {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private void status () {
 		try {
 			con = dao.conectar();

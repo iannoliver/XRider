@@ -64,6 +64,7 @@ public class Servicos extends JDialog {
 	private JButton btnBuscar;
 	private JTextField txtCliente;
 	private JScrollPane scrollPaneServicos;
+	@SuppressWarnings("rawtypes")
 	private JList listServicos;
 	private JLabel lblNewLabel_4;
 	private JButton btnOS;
@@ -100,6 +101,7 @@ public class Servicos extends JDialog {
 		});
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Servicos() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Servicos.class.getResource("/img/IconBike.png")));
@@ -427,6 +429,7 @@ public class Servicos extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void listarServicos() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listServicos.setModel(modelo);

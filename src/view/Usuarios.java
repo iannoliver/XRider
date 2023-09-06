@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,26 +15,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 
 import model.DAO;
-import utils.Validador;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-import java.awt.Font;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
 
 public class Usuarios extends JDialog {
 	DAO dao = new DAO();
@@ -46,9 +41,11 @@ public class Usuarios extends JDialog {
 	private JButton btnLimpar;
 	private JButton btnEditar;
 	private JButton btnExcluir;
+	@SuppressWarnings("rawtypes")
 	private final JList listUsers = new JList();
 	private JScrollPane scrollPaneUsers;
 	private JLabel lblPerfil;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cboPerfil;
 	private JCheckBox chckSenha;
 	private JTextField txtSenha;
@@ -74,6 +71,7 @@ public class Usuarios extends JDialog {
 		});
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Usuarios() {
 		setModal(true);
 		setResizable(false);
@@ -270,6 +268,7 @@ public class Usuarios extends JDialog {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private void listarUsuarios() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listUsers.setModel(modelo);

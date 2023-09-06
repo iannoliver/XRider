@@ -36,6 +36,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class Clientes extends JDialog {
 	DAO dao = new DAO();
 	private Connection con;
@@ -56,8 +57,10 @@ public class Clientes extends JDialog {
 	private JButton btnLimpar;
 	private JTextField txtBairro;
 	private JTextField txtNumero;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cboUf;
 	private JScrollPane scrollPaneClientes;
+	@SuppressWarnings("rawtypes")
 	private JList listClientes;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
@@ -82,6 +85,7 @@ public class Clientes extends JDialog {
 		});
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Clientes() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Clientes.class.getResource("/img/IconBike.png")));
@@ -441,6 +445,7 @@ public class Clientes extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void listarClientes() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
 		listClientes.setModel(modelo);
@@ -584,7 +589,6 @@ public class Clientes extends JDialog {
 			if (confirm == JOptionPane.YES_OPTION) {
 				String delete = "delete from clientes where idcli = ?";
 				try {
-					// abrir a conexão
 					con = dao.conectar();
 					pst = con.prepareStatement(delete);
 					pst.setString(1, txtIdcli.getText());

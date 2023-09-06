@@ -1,12 +1,32 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Iterator;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -14,32 +34,6 @@ import org.dom4j.io.SAXReader;
 
 import model.DAO;
 import utils.Validador;
-
-import java.awt.Toolkit;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Iterator;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Font;
 
 public class Fornecedores extends JDialog {
 	DAO dao = new DAO();
@@ -59,6 +53,7 @@ public class Fornecedores extends JDialog {
 	private JTextField txtNumero;
 	private JTextField txtCep;
 	private JScrollPane scrollPaneFor;
+	@SuppressWarnings("rawtypes")
 	private JList listFornecedores;
 	private JButton btnAdicionar;
 	private JButton btnExcluir;
@@ -70,6 +65,7 @@ public class Fornecedores extends JDialog {
 	private JTextField txtFone;
 	private JTextField txtSite;
 	private JTextField txtIE;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cboUf;
 
 	public static void main(String[] args) {
@@ -82,6 +78,7 @@ public class Fornecedores extends JDialog {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Fornecedores() {
 		setModal(true);
 		setResizable(false);
@@ -457,9 +454,7 @@ public class Fornecedores extends JDialog {
 				pst = con.prepareStatement(readListaUsuario);
 				rs = pst.executeQuery();
 				if (rs.next()) {
-					// esconder a lista
 					scrollPaneFor.setVisible(false);
-					// setar os campos
 					txtID.setText(rs.getString(1));
 					txtRazaoSocial.setText(rs.getString(2));
 					txtNomeFanta.setText(rs.getString(3));
@@ -491,11 +486,10 @@ public class Fornecedores extends JDialog {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void listarFornecedores() {
 		DefaultListModel<String> modelo = new DefaultListModel<>();
-		// setar o modelo (vetor da lista)
 		listFornecedores.setModel(modelo);
-		// Query (instrução sql)
 		String readLista = "select * from fornecedores where razao like '" + txtRazaoSocial.getText() + "%'"
 				+ "order by razao";
 		try {

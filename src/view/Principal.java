@@ -19,30 +19,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.DAO;
-import java.awt.Dimension;
 
 public class Principal extends JFrame {
 	DAO dao = new DAO();
 	private Connection con;
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblStatus;
 	public JLabel panelRodapé;
 	public JLabel lblData;
 	private JLabel lblNewLabel_2;
-	//está label abaixo será alterada pela tela de login
 	public JLabel lblUsu;
 	public JButton btnUsuarios;
 	public JButton btnRelatorio;
 	private JLabel lblUsuario;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,9 +49,6 @@ public class Principal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Principal() {
 		setResizable(false);
 		setBackground(new Color(255, 255, 255));
