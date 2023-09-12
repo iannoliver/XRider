@@ -7,7 +7,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `usuarios` VALUES (login, senha, perfil),('Administrador',  md5('admin'), 'admin');
+INSERT INTO `usuarios` VALUES (nome, login, senha, perfil),('Administrador', 'admin', md5('admin'), 'admin');
 
 CREATE TABLE `servicos` (
   `os` int NOT NULL AUTO_INCREMENT,
