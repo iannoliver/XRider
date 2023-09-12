@@ -9,8 +9,23 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios`(nome, login, senha, perfil) VALUES ('Administrador', 'admin', md5('admin'), 'admin');
 
+CREATE TABLE `clientes` (
+  `idcli` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `cliente` varchar(50) NOT NULL,
+  `contato` varchar(15) NOT NULL UNIQUE,
+  `email` varchar(50) NOT NULL,
+  `endereco` varchar(20) NOT NULL,
+  `complemento` varchar(10) DEFAULT NULL,
+  `cpfecnpj` varchar(14) NOT NULL UNIQUE,
+  `cidade` varchar(40) DEFAULT NULL,
+  `cep` varchar(10) NOT NULL,
+  `bairro` varchar(30) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `numero` varchar(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `servicos` (
-  `os` int NOT NULL AUTO_INCREMENT,
+  `os` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `dataOS` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `marca` varchar(30) NOT NULL,
   `modelo` varchar(50) NOT NULL,
@@ -21,29 +36,8 @@ CREATE TABLE `servicos` (
   `defeito` varchar(200) NOT NULL,
   `valor` decimal(10,2) DEFAULT NULL,
   `idcli` int NOT NULL,
-  PRIMARY KEY (`os`),
-  KEY `idcli` (`idcli`),
-  CONSTRAINT `servicos_ibfk_1` FOREIGN KEY (`idcli`) REFERENCES `clientes` (`idcli`)
+  FOREIGN KEY (`idcli`) REFERENCES `clientes` (`idcli`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
-
-
-CREATE TABLE `clientes` (
-  `idcli` int NOT NULL AUTO_INCREMENT,
-  `cliente` varchar(50) NOT NULL,
-  `contato` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `endereco` varchar(20) NOT NULL,
-  `complemento` varchar(10) DEFAULT NULL,
-  `cpfecnpj` varchar(14) NOT NULL,
-  `cidade` varchar(40) DEFAULT NULL,
-  `cep` varchar(10) NOT NULL,
-  `bairro` varchar(30) NOT NULL,
-  `uf` varchar(2) NOT NULL,
-  `numero` varchar(10) NOT NULL,
-  PRIMARY KEY (`idcli`),
-  UNIQUE KEY `contato` (`contato`),
-  UNIQUE KEY `cpfecnpj` (`cpfecnpj`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 
 create table fornecedores(
@@ -67,7 +61,7 @@ create table fornecedores(
 
     
     CREATE TABLE `produtos` (
-  `idproduto` int NOT NULL AUTO_INCREMENT,
+  `idproduto` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `produto` varchar(50) NOT NULL,
   `barcode` varchar(30) DEFAULT NULL,
   `fabricante` varchar(45) NOT NULL,
@@ -83,7 +77,5 @@ create table fornecedores(
   `lote` varchar(45) NOT NULL,
   `lucro` int DEFAULT NULL,
   `idfornecedor` int NOT NULL,
-  PRIMARY KEY (`idproduto`),
-  KEY `idfornecedor` (`idfornecedor`),
-  CONSTRAINT `produtos` FOREIGN KEY (`idfornecedor`) REFERENCES `fornecedores` (`idfornecedor`)
+  FOREIGN KEY (`idfornecedor`) REFERENCES `fornecedores` (`idfornecedor`)
 );
