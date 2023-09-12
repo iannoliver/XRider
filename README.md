@@ -3,29 +3,31 @@
 <br>
 <hr>
 
+!["XRider"](iconread/Xrider.png)
+
 ## Descrição: <br>
 O sistema foi feito usando diversas ferramentas de desenvolvimento, algumas métodologias fundamentais e muita lógica e construção de dados!!
 Foi-se utilizado a princípio um servidor Linux desenvolvido em uma VM(Virtual Machine) para hospedar e puxar um id de conexão para a utilização do banco de dados.
 
-"imagem"
+!["ubuntu"](iconread/rack1.png) !["ubuntu2"](iconread/rack2.png)
 <br>
 <hr>
 
 Conceitos do CRUD(Create, Read, Update, Delete) para construção de tabelas e manipulação dos dados alimentados nessas tabelas.
 
-"imagem"
+!["bancodados"](iconread/bancodados.png)
 <br>
 <hr>
 
 Utilizados conceitos e lógica de programação pela linguagem back-end JAVA.
 
-"imagem"
+!["Java"](iconread/java.png)
 <br>
 <hr>
 
 Após um bom tempo, o servidor fora realocado para o XAMPP para seu desfecho como app para utilização global.
 
-"imagem"
+!["host"](iconread/hostbancodados.png)
 <br>
 <hr>
 
@@ -40,6 +42,8 @@ Após um bom tempo, o servidor fora realocado para o XAMPP para seu desfecho com
 - Faça a importação do Script do projeto (XRider na pasta banco) selecionando o banco de dados dbsistema
 - Em "Releases" Faça o download do instalador Sistema-XRider
 - Execute a instalação. Na tela de login faça a autenticação com o usuário "admin" usando a senha "admin"
+
+ !["instalacao"](iconread/html.png)
 
 <br>
 <hr>
