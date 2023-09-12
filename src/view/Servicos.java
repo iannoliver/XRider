@@ -597,7 +597,8 @@ public class Servicos extends JDialog {
 				pst.setString(7, txtOBSE.getText());
 				pst.setString(8, txtDefeito.getText());
 				pst.setString(9, txtValor.getText());
-				pst.setString(10, txtID.getText());
+				pst.setString(10, txtDiagnostico());
+				pst.setString(11, txtID.getText());
 				pst.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Dados do cliente editados com sucesso!!");
 				limparCampos();
