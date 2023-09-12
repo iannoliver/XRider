@@ -31,10 +31,11 @@ CREATE TABLE `servicos` (
   `modelo` varchar(50) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `cor` varchar(30) NUll,
-  `numero de serie` varchar(50) NOT NULL,
-  `observacoes especiais` varchar(200) NULL,
+  `numeroserie` varchar(50) NOT NULL,
+  `observacoesespeciais` varchar(200) NULL,
   `defeito` varchar(200) NOT NULL,
   `valor` decimal(10,2) DEFAULT NULL,
+  `diagnostico` text NOT NULL,
   `idcli` int NOT NULL,
   FOREIGN KEY (`idcli`) REFERENCES `clientes` (`idcli`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
