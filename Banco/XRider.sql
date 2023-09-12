@@ -5,9 +5,9 @@ CREATE TABLE `usuarios` (
   `senha` varchar(250) NOT NULL,
   `perfil` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `usuarios` VALUES (nome, login, senha, perfil),('Administrador', 'admin', md5('admin'), 'admin');
+INSERT INTO `usuarios`(nome, login, senha, perfil) VALUES ('Administrador', 'admin', md5('admin'), 'admin');
 
 CREATE TABLE `servicos` (
   `os` int NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ CREATE TABLE `servicos` (
   PRIMARY KEY (`os`),
   KEY `idcli` (`idcli`),
   CONSTRAINT `servicos_ibfk_1` FOREIGN KEY (`idcli`) REFERENCES `clientes` (`idcli`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE `clientes` (
@@ -43,7 +43,7 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`idcli`),
   UNIQUE KEY `contato` (`contato`),
   UNIQUE KEY `cpfecnpj` (`cpfecnpj`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 
 create table fornecedores(
