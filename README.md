@@ -4,7 +4,7 @@
 <hr>
 
 ## Descrição: <br>
-O sistema foi feita usando diversas ferramentas de desenvolvimento, algumas métodologias fundamentais e muita lógica e construção de dados!!
+O sistema foi feito usando diversas ferramentas de desenvolvimento, algumas métodologias fundamentais e muita lógica e construção de dados!!
 Foi-se utilizado a princípio um servidor Linux desenvolvido em uma VM(Virtual Machine) para hospedar e puxar um id de conexão para a utilização do banco de dados.
 
 "imagem"
@@ -35,11 +35,11 @@ Após um bom tempo, o servidor fora realocado para o XAMPP para seu desfecho com
 - XAMPP Control v3.3.0
 
 ## Instalação:
-Execute o banco de dados MySQL (localhost) como root(não precisa de senha)
-Crie um  banco de dados de nome dbsistema
-Faça a importação do Script do projeto (pasta banco) selecionando o banco de dados dbsistema
-Em "Releases" Faça o download do instalador Sistema-XRider
-Execute a instalação. Na tela de login faça a autenticação com o usuário "admin" usando a senha "admin"
+- Execute o banco de dados MySQL (localhost) como root(não precisa de senha)
+- Crie um  banco de dados de nome dbsistema
+- Faça a importação do Script do projeto (XRider na pasta banco) selecionando o banco de dados dbsistema
+- Em "Releases" Faça o download do instalador Sistema-XRider
+- Execute a instalação. Na tela de login faça a autenticação com o usuário "admin" usando a senha "admin"
 
 <br>
 <hr>
